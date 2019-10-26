@@ -1,0 +1,15 @@
+# Archivos de configuración
+.svn
+.buildpath
+.idea
+.project
+.settings
+.classpath
+
+# Directorios de Spring
+.springBeans
+src/main/webapp/WEB-INF/spring/*
+
+# Otros  
+target/*
+/target/
