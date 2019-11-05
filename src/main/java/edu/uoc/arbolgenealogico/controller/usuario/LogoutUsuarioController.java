@@ -11,24 +11,25 @@ import edu.uoc.arbolgenealogico.pojo.Usuario;
 import edu.uoc.arbolgenealogico.service.interfaces.IUsuarioService;
 
 @Controller
-public class UsuarioController {
-	
+public class LogoutUsuarioController {
+
 	@Autowired
 	@Qualifier ("usuarioService")
 	private IUsuarioService userservice;	
-
+	
 	/**
-	 * Método que lleva a la pagina principal de usuarios
+	 * Método que cierra la sesion del usuario conectado
 	 * @return ModelAndView
 	 */	
-	@RequestMapping(value ="/usuarios", method = RequestMethod.GET)
-	protected ModelAndView usuariocontroller()  {
+	@RequestMapping(value ="/usuarios/logout", method = RequestMethod.GET)
+	protected ModelAndView logoutusuariocontroller()  {
 		
 		ModelAndView modeloUsuario = new ModelAndView();
 		Usuario user = userservice.getByOnline();
 		if(user!=null){
-			modeloUsuario.addObject("usuario", user);
-			modeloUsuario.setViewName("/usuario/index");
+			user.setOnline(0);
+			userservice.update(user);	
+			modeloUsuario.setViewName("logout");
 		}else{
 			modeloUsuario = new ModelAndView("error");
 		}

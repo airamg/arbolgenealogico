@@ -1,6 +1,6 @@
 package edu.uoc.arbolgenealogico.pojo;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Usuario  {
 		setApellidos("");
 		setRuta_imagen("resources/images/cliente/default.png");
 		setUltima_conexion(new Date(Calendar.getInstance().getTime().getTime()));
-		setOnline(1);
+		setOnline(0);
 		setListaMiembros(new ArrayList<Miembro>());
 	}
 	

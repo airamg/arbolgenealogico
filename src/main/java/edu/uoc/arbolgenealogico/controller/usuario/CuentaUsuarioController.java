@@ -11,24 +11,24 @@ import edu.uoc.arbolgenealogico.pojo.Usuario;
 import edu.uoc.arbolgenealogico.service.interfaces.IUsuarioService;
 
 @Controller
-public class UsuarioController {
-	
+public class CuentaUsuarioController {
+
 	@Autowired
 	@Qualifier ("usuarioService")
 	private IUsuarioService userservice;	
-
+	
 	/**
-	 * Método que lleva a la pagina principal de usuarios
+	 * Método que lleva a la cuenta personal del usuario online en la que se muestran todos sus datos
 	 * @return ModelAndView
 	 */	
-	@RequestMapping(value ="/usuarios", method = RequestMethod.GET)
-	protected ModelAndView usuariocontroller()  {
+	@RequestMapping(value ="/usuarios/cuenta", method = RequestMethod.GET)
+	protected ModelAndView cuentausuariocontroller()  {
 		
 		ModelAndView modeloUsuario = new ModelAndView();
 		Usuario user = userservice.getByOnline();
 		if(user!=null){
 			modeloUsuario.addObject("usuario", user);
-			modeloUsuario.setViewName("/usuario/index");
+			modeloUsuario.setViewName("/usuario/cuenta");
 		}else{
 			modeloUsuario = new ModelAndView("error");
 		}
