@@ -57,6 +57,7 @@ public class RegistroUsuarioController {
 				usu.setPass(usuario.getPass());
 				usu.setNombre(usuario.getNombre());
 				usu.setApellidos(usuario.getApellidos());
+				usu.setEmail(usuario.getEmail());
 				userservice.create(usu);
 				model = "redirect:usuarios";		
 			} else {
@@ -70,7 +71,8 @@ public class RegistroUsuarioController {
 		request.setAttribute("usuariopass", usuario.getPass());
 		request.setAttribute("usuarionombre", usuario.getNombre());
 		request.setAttribute("usuarioapellidos", usuario.getApellidos());
-
+		request.setAttribute("usuarioemail", usuario.getEmail());
+		
 		return model;
 	}
 }

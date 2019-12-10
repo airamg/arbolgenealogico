@@ -1,9 +1,7 @@
 package edu.uoc.arbolgenealogico.pojo;
 
 import java.util.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Usuario  {
 	
@@ -12,20 +10,20 @@ public class Usuario  {
 	private String pass;
 	private String nombre;
 	private String apellidos;
+	private String email;
 	private String ruta_imagen;
 	private Date ultima_conexion;
 	private int online; // 1: conectado - 0: desconectado
-	private List<Miembro> listaMiembros;	
 	
 	public Usuario() {		
 		setUsername("");
 		setPass("");
 		setNombre("");
 		setApellidos("");
-		setRuta_imagen("resources/images/cliente/default.png");
+		setEmail("");
+		setRuta_imagen("resources/images/usuario/default.png");
 		setUltima_conexion(new Date(Calendar.getInstance().getTime().getTime()));
 		setOnline(0);
-		setListaMiembros(new ArrayList<Miembro>());
 	}
 	
 	public int getId() {
@@ -68,6 +66,14 @@ public class Usuario  {
 		this.apellidos = apellidos;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	public String getRuta_imagen() {
 		return ruta_imagen;
 	}
@@ -90,14 +96,6 @@ public class Usuario  {
 
 	public void setOnline(int online) {
 		this.online = online;
-	}
-	
-	public List<Miembro> getListaMiembros() {
-		return listaMiembros;
-	}
-	
-	public void setListaMiembros(List<Miembro> listaMiembros) {
-		this.listaMiembros = listaMiembros;
 	}
 	
 }

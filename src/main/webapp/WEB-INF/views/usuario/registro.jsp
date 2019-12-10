@@ -33,6 +33,10 @@
 								<form:input id="apellidos" name="apellidos" path="apellidos"
 									placeholder="Apellidos" />
 							</div>
+							<div class="form-group">
+								<form:input id="email" name="email" path="email"
+									placeholder="Email" />
+							</div>
 							<div class="clearfix"></div>
 							<div class="col-lg-12 text-center">
 								<button type="submit" class="btn btn-xl">Crear</button>
