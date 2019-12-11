@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import edu.uoc.arbolgenealogico.model.interfaces.IMiembroDAO;
+import edu.uoc.arbolgenealogico.model.mappers.MiembroJoinMapper;
 import edu.uoc.arbolgenealogico.model.mappers.MiembroMapper;
 import edu.uoc.arbolgenealogico.pojo.Miembro;
 
@@ -48,7 +49,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		List<Miembro> miembros = null;
 		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and nombre=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, nombre }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, nombre }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}
@@ -60,7 +61,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		List<Miembro> miembros = null;
 		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and apellido=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, apellido }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, apellido }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}
@@ -72,7 +73,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		List<Miembro> miembros = null;
 		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and anio_nacimiento=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, anio }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, anio }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}
@@ -84,7 +85,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		List<Miembro> miembros = null;
 		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and anio_defuncion=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, anio }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, anio }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}
@@ -96,7 +97,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		List<Miembro> miembros = null;
 		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and historial_medico=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, enfermedad }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, enfermedad }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}
@@ -108,7 +109,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		List<Miembro> miembros = null;
 		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and rama=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, rama }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, rama }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}
@@ -118,9 +119,9 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getAll(int idusuario) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,usuario,parentesco FROM miembro WHERE usuario=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario }, new MiembroMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}

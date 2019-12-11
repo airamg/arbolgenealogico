@@ -6,17 +6,19 @@ public class Miembro {
 	private String nombre;
 	private String apellido;
 	private String rutaImagen;
-	private int anioNacimiento;
-	private int anioDefuncion;
+	private String anioNacimiento;
+	private String anioDefuncion;
 	private String historialMedico;
+	private String parentesco;
 	
 	public Miembro() {
 		setNombre("");
 		setApellido("");
 		setRutaImagen("resources/images/arbol/miembro.png");
-		setAnioNacimiento(1900);
-		setAnioDefuncion(1900);
+		setAnioNacimiento("");
+		setAnioDefuncion("");
 		setHistorialMedico("");
+		setParentesco("");
 	}
 
 	public int getId() {
@@ -51,19 +53,19 @@ public class Miembro {
 		this.rutaImagen = rutaImagen;
 	}
 
-	public int getAnioNacimiento() {
+	public String getAnioNacimiento() {
 		return anioNacimiento;
 	}
 
-	public void setAnioNacimiento(int anioNacimiento) {
+	public void setAnioNacimiento(String anioNacimiento) {
 		this.anioNacimiento = anioNacimiento;
 	}
 
-	public int getAnioDefuncion() {
+	public String getAnioDefuncion() {
 		return anioDefuncion;
 	}
 
-	public void setAnioDefuncion(int anioDefuncion) {
+	public void setAnioDefuncion(String anioDefuncion) {
 		this.anioDefuncion = anioDefuncion;
 	}
 
@@ -73,6 +75,14 @@ public class Miembro {
 
 	public void setHistorialMedico(String historialMedico) {
 		this.historialMedico = historialMedico;
+	}
+
+	public String getParentesco() {
+		return parentesco;
+	}
+
+	public void setParentesco(String parentesco) {
+		this.parentesco = parentesco;
 	}
 
 }

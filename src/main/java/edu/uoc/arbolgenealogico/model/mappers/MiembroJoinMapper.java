@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import edu.uoc.arbolgenealogico.pojo.Miembro;
 
-public class MiembroMapper implements RowMapper<Miembro> {
+public class MiembroJoinMapper implements RowMapper<Miembro> {
 
 	@Override
 	public Miembro mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -19,6 +19,7 @@ public class MiembroMapper implements RowMapper<Miembro> {
 		miembro.setAnioNacimiento(rs.getString("anio_nacimiento"));
 		miembro.setAnioDefuncion(rs.getString("anio_defuncion"));
 		miembro.setHistorialMedico(rs.getString("historial_medico"));
+		miembro.setParentesco(rs.getString("descripcion"));
 	    return miembro;
 	}
 

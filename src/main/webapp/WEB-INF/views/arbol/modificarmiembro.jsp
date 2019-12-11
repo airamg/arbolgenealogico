@@ -14,15 +14,34 @@
 					</div>
 					<div class="col-lg-12 text-center">
 					
-						<form:form id="modificarmiembroForm" method="post" action="arbol/modificarmiembro"
-							modelAttribute="usuario">
+						<form:form id="modificarmiembroForm" method="post" action="miembros/modificar/${miembro.id}"
+							modelAttribute="miembro">
 							
 							<div class="form-group">
-								<form:input id="parentesco" name="parentesco" path="parentesco"
-									placeholder="Parentesco" value="${usuario.username}" />
-									<!-- devolver lista de parentescos -->
+								<form:input id="nombre" name="nombre" path="nombre"
+									placeholder="Nombre" value="${miembro.nombre}" />
 							</div>
-
+							<div class="form-group">
+								<form:input id="apellido" name="apellido" path="apellido"
+									placeholder="Apellido" value="${miembro.apellido}"/>
+							</div>
+							<div class="form-group">
+								<form:input id="anioNacimiento" name="anioNacimiento" path="anioNacimiento"
+									placeholder="Año nacimiento" value="${miembro.anioNacimiento}"/>
+							</div>
+							<div class="form-group">
+								<form:input id="anioDefuncion" name="anioDefuncion" path="anioDefuncion"
+									placeholder="Año defuncion" value="${miembro.anioDefuncion}"/>
+							</div>
+							<div class="form-group">
+								<form:input id="historialMedico" name="historialMedico" path="historialMedico"
+									placeholder="Historial médico" value="${miembro.historialMedico}"/>
+							</div>
+							
+							<div class="form-group">
+								<!-- lista de parentescos -->
+							</div>
+							
 							<div class="clearfix"></div>
 							<div class="col-lg-12 text-center">
 								<button type="submit" class="btn btn-xl">Guardar</button>

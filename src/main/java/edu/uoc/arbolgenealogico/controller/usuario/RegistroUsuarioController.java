@@ -46,12 +46,12 @@ public class RegistroUsuarioController {
 	public String executeRegistroUsuario(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("usuario") Usuario usuario) {
 		String model = null;
 		//comprobar quien esta online
-		Usuario cl = userservice.getByOnline();
-		if(cl==null) {
+		Usuario user = userservice.getByOnline();
+		if(user==null) {
 			//comprobar que el nuevo usuario no este repetido
 			Usuario u = userservice.getByUsername(usuario.getUsername());
 			if(u==null) {
-				//guardar en la bd el nuevo cliente
+				//guardar en la bd el nuevo usuario
 				Usuario usu = new Usuario();			
 				usu.setUsername(usuario.getUsername());
 				usu.setPass(usuario.getPass());

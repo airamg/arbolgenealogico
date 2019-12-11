@@ -9,7 +9,7 @@
 			<div class="col-md-4">
 				<ul class="list-inline quicklinks">					
 					<li><a href="usuarios/cuenta">Mi cuenta</a></li>
-					<li><a href="usuarios/arbol">Mi árbol</a></li>
+					<li><a href="miembros/index">Mi árbol</a></li>
 					<li><a href="usuarios/logout">Cerrar sesión</a></li>
 				</ul>
 			</div>

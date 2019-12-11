@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `online` int(1) DEFAULT NULL,
   `ultima_conexion` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=200 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -40,23 +40,23 @@ CREATE TABLE IF NOT EXISTS `parentesco` (
   `descripcion` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `rama` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=200 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10;
 
 --
 -- Volcado de datos para la tabla `parentesco`
 --
 
 INSERT INTO `parentesco` (`id`, `descripcion`, `rama`) VALUES
-(1, 'hermano', 0),
-(2, 'hermana', 0),
-(3, 'primo', 0),
-(4, 'prima', 0),
-(5, 'padre', 1),
-(6, 'madre', 1),
-(7, 'tio', 1),
-(8, 'tia', 1),
-(9, 'abuelo', 2),
-(10, 'abuela', 2);
+(1, 'Hermano', 0),
+(2, 'Hermana', 0),
+(3, 'Primo', 0),
+(4, 'Prima', 0),
+(5, 'Padre', 1),
+(6, 'Madre', 1),
+(7, 'Tio', 1),
+(8, 'Tia', 1),
+(9, 'Abuelo', 2),
+(10, 'Abuela', 2);
 
 
 
@@ -71,22 +71,22 @@ CREATE TABLE IF NOT EXISTS `miembro` (
   `nombre` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellido` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ruta_imagen` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `anio_nacimiento` int(4) DEFAULT NULL,
-  `anio_defuncion` int(4) DEFAULT NULL,
+  `anio_nacimiento` varchar(4) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `anio_defuncion` varchar(4) COLLATE utf8_spanish_ci DEFAULT NULL,
   `historial_medico` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
   `usuario` int(11) DEFAULT NULL,
   `parentesco` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario` (`usuario`),
   KEY `idParentesco` (`parentesco`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=200 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2;
 
 --
 -- Volcado de datos para la tabla `miembro`
 --
 
 INSERT INTO `miembro` (`id`, `nombre`, `apellido`, `ruta_imagen`, `anio_nacimiento`, `anio_defuncion`, `historial_medico`, `usuario`, `parentesco`) VALUES
-(1, 'Juan', 'Gonzalez', 'resources/images/arbol/miembro.png', 1960, NULL, 'enfermedad cardiovascular', 1, 5);
+(1, 'Juan', 'Gonzalez', 'resources/images/arbol/miembro.png', '1960', NULL, 'enfermedad cardiovascular', 1, 5);
 
 -- --------------------------------------------------------
 
