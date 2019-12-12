@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h2 class="section-heading2">MI ÁRBOL GENEALÓGICO</h2>
+				<h2 class="section-heading2">GESTIÓN DE MIEMBROS DEL ÁRBOL</h2>
 				<div class="team-member">
 					<ul class="list-inline social-buttons">
 						<li><a href="miembros/arbol"><i class="fa fa-tree fa-3x fa-stack-2x text-primary"></i></a></li>

@@ -1,5 +1,7 @@
 package edu.uoc.arbolgenealogico.controller.arbol;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.uoc.arbolgenealogico.pojo.Miembro;
+import edu.uoc.arbolgenealogico.pojo.Parentesco;
 import edu.uoc.arbolgenealogico.service.interfaces.IMiembroService;
+import edu.uoc.arbolgenealogico.service.interfaces.IParentescoService;
 
 @Controller
 public class ModificarMiembroController {
@@ -21,6 +25,10 @@ public class ModificarMiembroController {
 	@Autowired
 	@Qualifier ("miembroService")
 	private IMiembroService miembroservice;
+	
+	@Autowired
+	@Qualifier ("parentescoService")
+	private IParentescoService parentescoservice;
 
 	
 	/**
@@ -34,6 +42,11 @@ public class ModificarMiembroController {
 		ModelAndView modeloMiembro = new ModelAndView("/arbol/modificarmiembro");
 		Miembro miembro = miembroservice.getById(id);
 		modeloMiembro.addObject("miembro", miembro);
+		
+		//lista para el desplegable de parentesco
+		List<Parentesco> parentescos = parentescoservice.getAll();
+		modeloMiembro.addObject("lista_parentesco", parentescos);
+		
 		return modeloMiembro;
 		
 	}
@@ -44,16 +57,15 @@ public class ModificarMiembroController {
 	 * @param request
 	 * @param response
 	 * @param miembro
-	 * @param id
 	 * @return String
 	 */
-	@RequestMapping(value = "/usuarios/modificar/{id}", method = RequestMethod.POST)
-	public String executeModificarMiembro(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("miembro") Miembro miembro, @PathVariable(value = "id") int id) {
+	@RequestMapping(value = "/usuarios/modificar", method = RequestMethod.POST)
+	public String executeModificarMiembro(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("miembro") Miembro miembro) {
 
 		String model = null;
 		
 		//comprobar que el miembro existe
-		Miembro m = miembroservice.getById(id);
+		Miembro m = miembroservice.getById(miembro.getId());
 		if(m!=null){			
 			//actualizar la bd con los nuevos datos
 			m.setNombre(miembro.getNombre());

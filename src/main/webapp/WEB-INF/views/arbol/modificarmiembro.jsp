@@ -14,7 +14,7 @@
 					</div>
 					<div class="col-lg-12 text-center">
 					
-						<form:form id="modificarmiembroForm" method="post" action="miembros/modificar/${miembro.id}"
+						<form:form id="modificarmiembroForm" method="post" action="miembros/modificar"
 							modelAttribute="miembro">
 							
 							<div class="form-group">
@@ -36,10 +36,20 @@
 							<div class="form-group">
 								<form:input id="historialMedico" name="historialMedico" path="historialMedico"
 									placeholder="Historial médico" value="${miembro.historialMedico}"/>
-							</div>
-							
+							</div>							
 							<div class="form-group">
-								<!-- lista de parentescos -->
+								<select name="parentescos">
+									<c:forEach var="parentesco" items="${lista_parentesco}">
+										<c:choose>
+										    <c:when test="${miembro.parentesco==parentesco.id}">
+										        <option selected value="${parentesco.id}">${parentesco.descripcion}</option> 
+										    </c:when>    
+										    <c:otherwise>
+										       	<option value="${parentesco.id}">${parentesco.descripcion}</option> 
+										    </c:otherwise>
+										</c:choose>										
+									</c:forEach>
+								</select>								
 							</div>
 							
 							<div class="clearfix"></div>

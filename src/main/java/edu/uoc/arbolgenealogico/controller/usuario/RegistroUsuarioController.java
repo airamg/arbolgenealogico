@@ -59,7 +59,7 @@ public class RegistroUsuarioController {
 				usu.setApellidos(usuario.getApellidos());
 				usu.setEmail(usuario.getEmail());
 				userservice.create(usu);
-				model = "redirect:usuarios";		
+				model = "redirect:usuarios/cuenta";		
 			} else {
 				model = "error";	
 			}

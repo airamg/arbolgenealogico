@@ -29,10 +29,8 @@ public class ModificarUsuarioController {
 	protected ModelAndView modificarusuariocontroller()  {
 		
 		ModelAndView modeloUsuario = new ModelAndView("/usuario/modificar");
-		Usuario usuario = new Usuario();
+		Usuario usuario = userservice.getByOnline();
 		modeloUsuario.addObject("usuario", usuario);
-		Usuario user = userservice.getByOnline();
-		modeloUsuario.addObject("user", user);
 		return modeloUsuario;
 
 	}

@@ -1,5 +1,7 @@
 package edu.uoc.arbolgenealogico.controller.arbol;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.uoc.arbolgenealogico.pojo.Miembro;
+import edu.uoc.arbolgenealogico.pojo.Parentesco;
 import edu.uoc.arbolgenealogico.pojo.Usuario;
 import edu.uoc.arbolgenealogico.service.interfaces.IMiembroService;
+import edu.uoc.arbolgenealogico.service.interfaces.IParentescoService;
 import edu.uoc.arbolgenealogico.service.interfaces.IUsuarioService;
 
 @Controller
@@ -26,6 +30,10 @@ public class NuevoMiembroController {
 	@Autowired
 	@Qualifier("usuarioService")
 	private IUsuarioService usuarioservice;
+	
+	@Autowired
+	@Qualifier ("parentescoService")
+	private IParentescoService parentescoservice;
 
 	/**
 	 * Método que muestra la pagina de nuevo miembro
@@ -39,6 +47,9 @@ public class NuevoMiembroController {
 		ModelAndView model = new ModelAndView("/arbol/nuevomiembro");
 		Miembro miembro = new Miembro();
 		model.addObject("miembro", miembro);
+		//lista para el desplegable de parentesco
+		List<Parentesco> parentescos = parentescoservice.getAll();
+		model.addObject("lista_parentesco", parentescos);
 		return model;
 	}
 

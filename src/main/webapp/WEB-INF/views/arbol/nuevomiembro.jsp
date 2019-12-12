@@ -36,10 +36,13 @@
 							<div class="form-group">
 								<form:input id="historialMedico" name="historialMedico" path="historialMedico"
 									placeholder="Historial médico" />
-							</div>
-							
+							</div>							
 							<div class="form-group">
-								<!-- lista de parentescos -->
+								<select name="parentescos">
+									<c:forEach var="parentesco" items="${lista_parentesco}">
+										<option value="${parentesco.id}">${parentesco.descripcion}</option> 						
+									</c:forEach>
+								</select>								
 							</div>
 							
 							<div class="clearfix"></div>
