@@ -8,7 +8,7 @@ import edu.uoc.arbolgenealogico.pojo.Miembro;
 
 public interface IMiembroDAO {
 	
-	public int create(Miembro m, int idusuario, int idparentesco);
+	public int create(Miembro m, int idusuario, int idparentesco, int iddescendencia);
 	
 	public Miembro getById(int codigo);
 	
@@ -31,6 +31,8 @@ public interface IMiembroDAO {
 	public int updateUsuarioList(int idmiembro, int idusuario);
 	
 	public int updateParentescoList(int idmiembro, int idparentesco);
+	
+	public int updateDescendenciaList(int idmiembro, int iddescendencia);
 	
 	public int delete(int codigo);
 	

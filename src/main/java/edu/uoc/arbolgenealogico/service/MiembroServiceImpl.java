@@ -13,8 +13,8 @@ public class MiembroServiceImpl implements IMiembroService {
 	private MiembroDAOImpl miembroDAO;
 
 	@Override
-	public int create(Miembro m, int idusuario, int idparentesco) {
-		int codigo=miembroDAO.create(m, idusuario, idparentesco);
+	public int create(Miembro m, int idusuario, int idparentesco, int iddescendencia) {
+		int codigo=miembroDAO.create(m, idusuario, idparentesco, iddescendencia);
 		return codigo;
 	}
 
@@ -88,6 +88,12 @@ public class MiembroServiceImpl implements IMiembroService {
 	@Override
 	public int updateParentescoList(int idmiembro, int idparentesco) {
 		int codigo=miembroDAO.updateParentescoList(idmiembro, idparentesco);
+		return codigo;
+	}
+	
+	@Override
+	public int updateDescendenciaList(int idmiembro, int iddescendencia) {
+		int codigo=miembroDAO.updateDescendenciaList(idmiembro, iddescendencia);
 		return codigo;
 	}
 

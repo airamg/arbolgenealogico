@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.uoc.arbolgenealogico.pojo.Descendencia;
 import edu.uoc.arbolgenealogico.pojo.Miembro;
 import edu.uoc.arbolgenealogico.pojo.Parentesco;
 import edu.uoc.arbolgenealogico.pojo.Usuario;
+import edu.uoc.arbolgenealogico.service.interfaces.IDescendenciaService;
 import edu.uoc.arbolgenealogico.service.interfaces.IMiembroService;
 import edu.uoc.arbolgenealogico.service.interfaces.IParentescoService;
 import edu.uoc.arbolgenealogico.service.interfaces.IUsuarioService;
@@ -34,6 +36,10 @@ public class NuevoMiembroController {
 	@Autowired
 	@Qualifier ("parentescoService")
 	private IParentescoService parentescoservice;
+	
+	@Autowired
+	@Qualifier ("descendenciaService")
+	private IDescendenciaService descendenciaservice;
 
 	/**
 	 * Método que muestra la pagina de nuevo miembro
@@ -47,9 +53,15 @@ public class NuevoMiembroController {
 		ModelAndView model = new ModelAndView("/arbol/nuevomiembro");
 		Miembro miembro = new Miembro();
 		model.addObject("miembro", miembro);
+		
 		//lista para el desplegable de parentesco
 		List<Parentesco> parentescos = parentescoservice.getAll();
 		model.addObject("lista_parentesco", parentescos);
+		
+		//lista para el desplegable de descendencia
+		List<Descendencia> descendencias = descendenciaservice.getAll();
+		model.addObject("lista_descendencia", descendencias);
+
 		return model;
 	}
 
@@ -69,25 +81,19 @@ public class NuevoMiembroController {
 		Usuario user = usuarioservice.getByOnline();
 		if(user!=null) {
 			//guardar en la bd el nuevo miembro
-			Miembro miem = new Miembro();			
+			Miembro miem = new Miembro();	
 			miem.setNombre(miembro.getNombre());
 			miem.setApellido(miembro.getApellido());
-			//TODO hacer que coja numero aleatorio para que sea de diferente color la foto
-			miem.setRutaImagen("resources/images/arbol/miembro.png");
+			//numero de foto que corresponda con el id del parentesco que se ha elegido
+			miem.setRutaImagen("resources/images/arbol/miembro"+miembro.getIdParentesco()+".png");
 			miem.setAnioNacimiento(miembro.getAnioNacimiento());
 			miem.setAnioDefuncion(miembro.getAnioDefuncion());
 			miem.setHistorialMedico(miembro.getHistorialMedico());
-			//TODO cambiar el 1 por el id del parentesco que habra que pasar como parametro
-			miembroservice.create(miem, user.getId(), 1);
-			model = "redirect:miembros/index";	
+			miembroservice.create(miem, user.getId(), miembro.getIdParentesco(), miembro.getIdDescendencia());
+			model = "redirect:/miembros/index";	
 		} else {
 			model = "error";	
 		}		
-		request.setAttribute("miembronombre", miembro.getNombre());
-		request.setAttribute("miembroapellido", miembro.getApellido());
-		request.setAttribute("miembroanionacimiento", miembro.getAnioNacimiento());
-		request.setAttribute("miembroaniodefuncion", miembro.getAnioDefuncion());
-		request.setAttribute("miembrohistorialmedico", miembro.getHistorialMedico());
 		
 		return model;
 	}

@@ -60,7 +60,7 @@ public class HomeController {
 				//redirigimos a la pagina principal del usuario
 				request.setAttribute("usuariousername", usuario.getUsername());
 				request.setAttribute("usuariopass", usuario.getPass());
-				model = "redirect:usuarios/cuenta";						
+				model = "redirect:/usuarios/cuenta";						
 			} else {
 				model = "error";
 			}
@@ -68,8 +68,6 @@ public class HomeController {
 			model = "error";
 		}
 
-		request.setAttribute("usuariousername", usuario.getUsername());
-		request.setAttribute("usuariopass", usuario.getPass());
 		return model;
 	}
 	

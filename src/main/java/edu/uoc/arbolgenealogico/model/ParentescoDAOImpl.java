@@ -63,7 +63,7 @@ public class ParentescoDAOImpl implements IParentescoDAO {
 	@Override
 	public List<Parentesco> getAll() {
 		List<Parentesco> listp = null;
-		final String SQL = "SELECT id,descripcion,rama FROM parentesco";
+		final String SQL = "SELECT id,descripcion,rama FROM parentesco ORDER BY id";
 		try {
 			listp = jdbctemplate.query(SQL, new ParentescoMapper());
 		} catch (EmptyResultDataAccessException e) {

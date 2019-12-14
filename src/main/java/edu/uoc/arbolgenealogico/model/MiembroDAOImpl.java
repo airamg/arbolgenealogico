@@ -24,17 +24,17 @@ public class MiembroDAOImpl implements IMiembroDAO {
 
 
 	@Override
-	public int create(Miembro m, int idusuario, int idparentesco) {
+	public int create(Miembro m, int idusuario, int idparentesco, int iddescendencia) {
 		int codigo;
-		final String SQL = "INSERT INTO miembro(nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,usuario,parentesco) VALUES (?,?,?,?,?,?,?,?)";
-		codigo = jdbctemplate.update(SQL, m.getNombre(), m.getApellido(), m.getRutaImagen(), m.getAnioNacimiento(), m.getAnioDefuncion(), m.getHistorialMedico(), idusuario, idparentesco);
+		final String SQL = "INSERT INTO miembro(nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,usuario,parentesco,descendencia) VALUES (?,?,?,?,?,?,?,?,?)";
+		codigo = jdbctemplate.update(SQL, m.getNombre(), m.getApellido(), m.getRutaImagen(), m.getAnioNacimiento(), m.getAnioDefuncion(), m.getHistorialMedico(), idusuario, idparentesco, iddescendencia);
 		return codigo;
 	}
 
 	@Override
 	public Miembro getById(int codigo) {
 		Miembro miembro = null;
-		final String SQL = "SELECT id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,usuario,parentesco FROM miembro WHERE id=?";
+		final String SQL = "SELECT id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,usuario,parentesco,descendencia FROM miembro WHERE id=?";
 		try {
 			miembro = jdbctemplate.queryForObject(SQL, new Object[] { codigo },
 					new MiembroMapper());
@@ -47,7 +47,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByNombre(int idusuario, String nombre) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and nombre=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and nombre=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, nombre }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -59,7 +59,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByApellido(int idusuario, String apellido) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and apellido=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and apellido=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, apellido }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -71,7 +71,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByAnioNacimiento(int idusuario, int anio) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and anio_nacimiento=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and anio_nacimiento=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, anio }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -83,7 +83,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByAnioDefuncion(int idusuario, int anio) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and anio_defuncion=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and anio_defuncion=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, anio }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -95,7 +95,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByHistorialMedico(int idusuario, String enfermedad) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and historial_medico=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and historial_medico=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, enfermedad }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -107,7 +107,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByRamaArbol(int idusuario, int rama) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=? and rama=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and rama=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, rama }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -119,7 +119,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getAll(int idusuario) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id WHERE usuario=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=?";
 		try {
 			miembros = jdbctemplate.query(SQL, new Object[] { idusuario }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -149,6 +149,14 @@ public class MiembroDAOImpl implements IMiembroDAO {
 		int codigo = -1;
 		final String SQL = "UPDATE miembro SET parentesco=? WHERE id=?";
 		codigo = jdbctemplate.update(SQL, idparentesco, idmiembro);
+		return codigo;
+	}
+	
+	@Override
+	public int updateDescendenciaList(int idmiembro, int iddescendencia) {
+		int codigo = -1;
+		final String SQL = "UPDATE miembro SET descendencia=? WHERE id=?";
+		codigo = jdbctemplate.update(SQL, iddescendencia, idmiembro);
 		return codigo;
 	}
 

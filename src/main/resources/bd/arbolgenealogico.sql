@@ -59,6 +59,27 @@ INSERT INTO `parentesco` (`id`, `descripcion`, `rama`) VALUES
 (10, 'Abuela', 2);
 
 
+-- --------------------------------------------------------
+
+--
+-- Estructura para la tabla `descendencia`
+--
+
+CREATE TABLE IF NOT EXISTS `descendencia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_rama` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3;
+
+--
+-- Volcado de datos para la tabla `descendencia`
+--
+
+INSERT INTO `descendencia` (`id`, `tipo_rama`) VALUES
+(1, ''),
+(2, 'Rama paterna'),
+(3, 'Rama materna');
+
 
 -- --------------------------------------------------------
 
@@ -76,17 +97,19 @@ CREATE TABLE IF NOT EXISTS `miembro` (
   `historial_medico` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
   `usuario` int(11) DEFAULT NULL,
   `parentesco` int(11) DEFAULT NULL,
+  `descendencia` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario` (`usuario`),
-  KEY `idParentesco` (`parentesco`)
+  KEY `idParentesco` (`parentesco`),
+  KEY `idDescendencia` (`descendencia`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2;
 
 --
 -- Volcado de datos para la tabla `miembro`
 --
 
-INSERT INTO `miembro` (`id`, `nombre`, `apellido`, `ruta_imagen`, `anio_nacimiento`, `anio_defuncion`, `historial_medico`, `usuario`, `parentesco`) VALUES
-(1, 'Juan', 'Gonzalez', 'resources/images/arbol/miembro.png', '1960', NULL, 'enfermedad cardiovascular', 1, 5);
+INSERT INTO `miembro` (`id`, `nombre`, `apellido`, `ruta_imagen`, `anio_nacimiento`, `anio_defuncion`, `historial_medico`, `usuario`, `parentesco`, `descendencia`) VALUES
+(1, 'Juan', 'Gonzalez', 'resources/images/arbol/miembro.png', '1960', NULL, 'enfermedad cardiovascular', 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -95,6 +118,7 @@ INSERT INTO `miembro` (`id`, `nombre`, `apellido`, `ruta_imagen`, `anio_nacimien
 --
 
 ALTER TABLE `miembro`
+  ADD CONSTRAINT `miembro_ibfk_3` FOREIGN KEY (`descendencia`) REFERENCES `descendencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `miembro_ibfk_2` FOREIGN KEY (`parentesco`) REFERENCES `parentesco` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `miembro_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 

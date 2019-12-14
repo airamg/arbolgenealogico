@@ -10,6 +10,9 @@ public class Miembro {
 	private String anioDefuncion;
 	private String historialMedico;
 	private String parentesco;
+	private String descendencia;
+	private int idParentesco;
+	private int idDescendencia;
 	
 	public Miembro() {
 		setNombre("");
@@ -19,6 +22,7 @@ public class Miembro {
 		setAnioDefuncion("");
 		setHistorialMedico("");
 		setParentesco("");
+		setDescendencia("");
 	}
 
 	public int getId() {
@@ -84,5 +88,30 @@ public class Miembro {
 	public void setParentesco(String parentesco) {
 		this.parentesco = parentesco;
 	}
+
+	public String getDescendencia() {
+		return descendencia;
+	}
+
+	public void setDescendencia(String descendencia) {
+		this.descendencia = descendencia;
+	}
+
+	public int getIdParentesco() {
+		return idParentesco;
+	}
+
+	public void setIdParentesco(int idParentesco) {
+		this.idParentesco = idParentesco;
+	}
+
+	public int getIdDescendencia() {
+		return idDescendencia;
+	}
+
+	public void setIdDescendencia(int idDescendencia) {
+		this.idDescendencia = idDescendencia;
+	}
+	
 
 }

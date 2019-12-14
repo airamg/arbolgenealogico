@@ -27,7 +27,7 @@ public class EliminarMiembroController {
 		Miembro m = miembroservice.getById(id);
 		if(m!=null) {
 			miembroservice.delete(m.getId());
-			model = "redirect:miembros/index";		
+			model = "redirect:/miembros/index";		
 		} else {
 			model = "error";	
 		}

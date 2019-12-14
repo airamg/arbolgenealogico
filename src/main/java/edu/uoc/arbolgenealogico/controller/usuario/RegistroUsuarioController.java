@@ -58,20 +58,15 @@ public class RegistroUsuarioController {
 				usu.setNombre(usuario.getNombre());
 				usu.setApellidos(usuario.getApellidos());
 				usu.setEmail(usuario.getEmail());
+				usu.setOnline(1);
 				userservice.create(usu);
-				model = "redirect:usuarios/cuenta";		
+				model = "redirect:/usuarios/cuenta";		
 			} else {
 				model = "error";	
 			}
 		} else {
 			model = "error";	
 		}
-		
-		request.setAttribute("usuariousername", usuario.getUsername());
-		request.setAttribute("usuariopass", usuario.getPass());
-		request.setAttribute("usuarionombre", usuario.getNombre());
-		request.setAttribute("usuarioapellidos", usuario.getApellidos());
-		request.setAttribute("usuarioemail", usuario.getEmail());
 		
 		return model;
 	}

@@ -18,6 +18,10 @@
 							modelAttribute="miembro">
 							
 							<div class="form-group">
+								<form:input type="hidden" id="id" name="id" path="id"
+									placeholder="Id" value="${miembro.id}" />
+							</div>							
+							<div class="form-group">
 								<form:input id="nombre" name="nombre" path="nombre"
 									placeholder="Nombre" value="${miembro.nombre}" />
 							</div>
@@ -34,22 +38,22 @@
 									placeholder="Año defuncion" value="${miembro.anioDefuncion}"/>
 							</div>
 							<div class="form-group">
-								<form:input id="historialMedico" name="historialMedico" path="historialMedico"
+								<form:textarea id="historialMedico" name="historialMedico" path="historialMedico"
 									placeholder="Historial médico" value="${miembro.historialMedico}"/>
 							</div>							
 							<div class="form-group">
-								<select name="parentescos">
+								<form:select path="idParentesco">
 									<c:forEach var="parentesco" items="${lista_parentesco}">
-										<c:choose>
-										    <c:when test="${miembro.parentesco==parentesco.id}">
-										        <option selected value="${parentesco.id}">${parentesco.descripcion}</option> 
-										    </c:when>    
-										    <c:otherwise>
-										       	<option value="${parentesco.id}">${parentesco.descripcion}</option> 
-										    </c:otherwise>
-										</c:choose>										
+										<form:option value="${parentesco.id}" label="${parentesco.descripcion}" />							
 									</c:forEach>
-								</select>								
+								</form:select>
+							</div>							
+							<div class="form-group">
+								<form:select path="idDescendencia">
+									<c:forEach var="descendencia" items="${lista_descendencia}">
+										<form:option value="${descendencia.id}" label="${descendencia.tipoRama}" />									
+									</c:forEach>
+								</form:select>
 							</div>
 							
 							<div class="clearfix"></div>

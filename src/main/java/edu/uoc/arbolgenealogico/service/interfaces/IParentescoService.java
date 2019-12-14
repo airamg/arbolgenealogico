@@ -16,7 +16,5 @@ public interface IParentescoService {
 	public List<Parentesco> getAll();
 	
 	public void setParentescoDAO(ParentescoDAOImpl parentescoDAO);
-	
-	
 
 }

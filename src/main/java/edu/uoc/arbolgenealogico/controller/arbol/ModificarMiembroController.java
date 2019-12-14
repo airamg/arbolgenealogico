@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.uoc.arbolgenealogico.pojo.Descendencia;
 import edu.uoc.arbolgenealogico.pojo.Miembro;
 import edu.uoc.arbolgenealogico.pojo.Parentesco;
+import edu.uoc.arbolgenealogico.service.interfaces.IDescendenciaService;
 import edu.uoc.arbolgenealogico.service.interfaces.IMiembroService;
 import edu.uoc.arbolgenealogico.service.interfaces.IParentescoService;
 
@@ -29,6 +31,10 @@ public class ModificarMiembroController {
 	@Autowired
 	@Qualifier ("parentescoService")
 	private IParentescoService parentescoservice;
+	
+	@Autowired
+	@Qualifier ("descendenciaService")
+	private IDescendenciaService descendenciaservice;
 
 	
 	/**
@@ -47,6 +53,10 @@ public class ModificarMiembroController {
 		List<Parentesco> parentescos = parentescoservice.getAll();
 		modeloMiembro.addObject("lista_parentesco", parentescos);
 		
+		//lista para el desplegable de descendencia
+		List<Descendencia> descendencias = descendenciaservice.getAll();
+		modeloMiembro.addObject("lista_descendencia", descendencias);
+
 		return modeloMiembro;
 		
 	}
@@ -59,13 +69,14 @@ public class ModificarMiembroController {
 	 * @param miembro
 	 * @return String
 	 */
-	@RequestMapping(value = "/usuarios/modificar", method = RequestMethod.POST)
+	@RequestMapping(value = "/miembros/modificar", method = RequestMethod.POST)
 	public String executeModificarMiembro(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("miembro") Miembro miembro) {
 
 		String model = null;
 		
 		//comprobar que el miembro existe
 		Miembro m = miembroservice.getById(miembro.getId());
+		
 		if(m!=null){			
 			//actualizar la bd con los nuevos datos
 			m.setNombre(miembro.getNombre());
@@ -73,8 +84,10 @@ public class ModificarMiembroController {
 			m.setAnioNacimiento(miembro.getAnioNacimiento());
 			m.setAnioDefuncion(miembro.getAnioDefuncion());
 			m.setHistorialMedico(miembro.getHistorialMedico());
-			miembroservice.update(m);		
-			model = "redirect:miembros/index";		
+			miembroservice.update(m);
+			miembroservice.updateParentescoList(m.getId(), miembro.getIdParentesco());
+			miembroservice.updateDescendenciaList(m.getId(), miembro.getIdDescendencia());
+			model = "redirect:/miembros/index";		
 		}else{
 			model = "error";
 		}

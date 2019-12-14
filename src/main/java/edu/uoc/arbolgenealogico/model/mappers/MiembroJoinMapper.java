@@ -20,6 +20,7 @@ public class MiembroJoinMapper implements RowMapper<Miembro> {
 		miembro.setAnioDefuncion(rs.getString("anio_defuncion"));
 		miembro.setHistorialMedico(rs.getString("historial_medico"));
 		miembro.setParentesco(rs.getString("descripcion"));
+		miembro.setDescendencia(rs.getString("tipo_rama"));
 	    return miembro;
 	}
 

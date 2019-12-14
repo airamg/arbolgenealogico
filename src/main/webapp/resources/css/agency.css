@@ -818,6 +818,11 @@ section#formulario .form-group textarea {
     padding: 20px;
 }
 
+section#formulario .form-group select {
+    padding: 20px;
+    width: 200px;
+}
+
 section#formulario .form-group input.form-control {
     height: auto;
 }

@@ -1,7 +1,7 @@
 <%@include file="../includes/head.jsp"%>
-<%@include file="../includes/menu.jsp"%>
+<%@include file="../includes/navusuario.jsp"%>
 
-<section id="contact">
+<section id="formulario" class="bg-light-gray">
 
 	<div class="container">
 		<div class="row">
@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h2 class="section-heading">Nuevo miembro</h2>
+							<h2 class="section-heading2">Nuevo miembro</h2>
 						</div>
 					</div>
 					<div class="col-lg-12 text-center">
@@ -34,17 +34,24 @@
 									placeholder="Año defuncion" />
 							</div>
 							<div class="form-group">
-								<form:input id="historialMedico" name="historialMedico" path="historialMedico"
+								<form:textarea id="historialMedico" name="historialMedico" path="historialMedico"
 									placeholder="Historial médico" />
 							</div>							
 							<div class="form-group">
-								<select name="parentescos">
+								<form:select path="idParentesco">
 									<c:forEach var="parentesco" items="${lista_parentesco}">
-										<option value="${parentesco.id}">${parentesco.descripcion}</option> 						
+										<form:option value="${parentesco.id}" label="${parentesco.descripcion}" />							
 									</c:forEach>
-								</select>								
+								</form:select>
+							</div>							
+							<div class="form-group">
+								<form:select path="idDescendencia">
+									<c:forEach var="descendencia" items="${lista_descendencia}">
+										<form:option value="${descendencia.id}" label="${descendencia.tipoRama}" />									
+									</c:forEach>
+								</form:select>
 							</div>
-							
+
 							<div class="clearfix"></div>
 							<div class="col-lg-12 text-center">
 								<button type="submit" class="btn btn-xl">Crear</button>
@@ -60,4 +67,4 @@
 </section>
 
 
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../includes/footerusuario.jsp"%>
