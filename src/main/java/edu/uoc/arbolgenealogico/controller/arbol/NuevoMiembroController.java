@@ -84,8 +84,29 @@ public class NuevoMiembroController {
 			Miembro miem = new Miembro();	
 			miem.setNombre(miembro.getNombre());
 			miem.setApellido(miembro.getApellido());
-			//numero de foto que corresponda con el id del parentesco que se ha elegido
-			miem.setRutaImagen("resources/images/arbol/miembro"+miembro.getIdParentesco()+".png");
+			//numero de foto que corresponda con el parentesco que haya elegido el usuario
+			String foto = "";
+			switch(miembro.getIdParentesco()){
+				case 1: case 2:
+					foto = "1";
+					break;
+				case 3: case 4:
+					foto = "2";
+					break;
+				case 5: case 6:
+					foto = "3";
+					break;
+				case 7: case 8:
+					foto = "4";
+					break;
+				case 9: case 10:
+					foto = "5";
+					break;
+				default:
+					foto = "";
+					break;
+			}
+			miem.setRutaImagen("resources/images/arbol/miembro"+foto+".png");
 			miem.setAnioNacimiento(miembro.getAnioNacimiento());
 			miem.setAnioDefuncion(miembro.getAnioDefuncion());
 			miem.setHistorialMedico(miembro.getHistorialMedico());

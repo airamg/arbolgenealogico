@@ -84,6 +84,29 @@ public class ModificarMiembroController {
 			m.setAnioNacimiento(miembro.getAnioNacimiento());
 			m.setAnioDefuncion(miembro.getAnioDefuncion());
 			m.setHistorialMedico(miembro.getHistorialMedico());
+			//numero de foto que corresponda con el parentesco que haya elegido el usuario
+			String foto = "";
+			switch(miembro.getIdParentesco()){
+				case 1: case 2:
+					foto = "1";
+					break;
+				case 3: case 4:
+					foto = "2";
+					break;
+				case 5: case 6:
+					foto = "3";
+					break;
+				case 7: case 8:
+					foto = "4";
+					break;
+				case 9: case 10:
+					foto = "5";
+					break;
+				default:
+					foto = "";
+					break;
+			}
+			m.setRutaImagen("resources/images/arbol/miembro"+foto+".png");
 			miembroservice.update(m);
 			miembroservice.updateParentescoList(m.getId(), miembro.getIdParentesco());
 			miembroservice.updateDescendenciaList(m.getId(), miembro.getIdDescendencia());

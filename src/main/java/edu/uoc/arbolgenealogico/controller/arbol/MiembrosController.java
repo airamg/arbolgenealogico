@@ -38,7 +38,12 @@ public class MiembrosController {
 			//sacar la lista de miembros que pertenecen al arbol del usuario online
 			List<Miembro> miembros = miembroservice.getAll(user.getId());		
 			miemb.addObject("lista_miembros",miembros);
-			miemb.addObject("usuario",user);
+			//si no hay miembros no debe mostrarse el icono de visualizar arbol
+			if(miembros.isEmpty()){
+				miemb.addObject("sinmiembros", "S");
+			}else{
+				miemb.addObject("sinmiembros", "N");
+			}			
 			miemb.setViewName("/arbol/index");
 		} else {
 			miemb = new ModelAndView("error");
