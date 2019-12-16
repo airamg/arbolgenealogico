@@ -17,7 +17,7 @@ public class Miembro {
 	public Miembro() {
 		setNombre("");
 		setApellido("");
-		setRutaImagen("resources/images/arbol/miembro.png");
+		setRutaImagen("");
 		setAnioNacimiento("");
 		setAnioDefuncion("");
 		setHistorialMedico("");

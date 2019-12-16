@@ -23,6 +23,8 @@ public interface IMiembroService {
 	
 	public List<Miembro> getByRamaArbol(int idusuario, int rama);
 	
+	public List<Miembro> getByDescendenciaRama(int idusuario, int rama, String descendencia);
+	
 	public List<Miembro> getAll(int idusuario);
 	
 	public int update(Miembro m);

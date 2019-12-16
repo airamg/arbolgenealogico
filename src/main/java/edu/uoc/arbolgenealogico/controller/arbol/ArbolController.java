@@ -1,4 +1,5 @@
 package edu.uoc.arbolgenealogico.controller.arbol;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,8 @@ public class ArbolController {
 			List<Miembro> miembros_rama0 = miembroservice.getByRamaArbol(user.getId(), 0);
 			List<Miembro> miembros_rama1 = miembroservice.getByRamaArbol(user.getId(), 1);
 			List<Miembro> miembros_rama2 = miembroservice.getByRamaArbol(user.getId(), 2);
-			miemb.addObject("lista_miembros_rama0",miembros_rama0);
-			miemb.addObject("lista_miembros_rama1",miembros_rama1);
-			miemb.addObject("lista_miembros_rama2",miembros_rama2);
-			miemb.addObject("usuario",user);
-			
-			//devolver tambien que tipo de rama tiene que mostrar para unir cada miembro
+
+			//devolver el tipo de rama para unir cada miembro
 			String row_Abuelos_TiosPadres_a = "";
 			String row_Abuelos_TiosPadres_b = "";
 			if(!miembros_rama2.isEmpty()){
@@ -86,10 +83,83 @@ public class ArbolController {
 			}
 			miemb.addObject("row_TiosPadres_PrimosHermanos_a",row_TiosPadres_PrimosHermanos_a);
 			miemb.addObject("row_TiosPadres_PrimosHermanos_b",row_TiosPadres_PrimosHermanos_b);
-			miemb.addObject("row_TiosPadres_PrimosHermanos_c",row_TiosPadres_PrimosHermanos_c);
+			miemb.addObject("row_TiosPadres_PrimosHermanos_c",row_TiosPadres_PrimosHermanos_c);	
 			
-			//TODO lista completas ordenadas por descendencia			
+			//ordenar las listas para mostrar cada miembro en su sitio del arbol
+			Miembro miembroVacio = new Miembro();
 			
+			//RAMA 0
+			List<Miembro> rama0_primospaternos = new ArrayList<Miembro>();
+			List<Miembro> rama0_hermanos = new ArrayList<Miembro>();			
+			List<Miembro> rama0_primosmaternos = new ArrayList<Miembro>();
+			if(miembros_rama0.isEmpty()){
+				rama0_primospaternos.add(miembroVacio);
+				rama0_primospaternos.add(miembroVacio);
+				rama0_primospaternos.add(miembroVacio);
+				rama0_primosmaternos.add(miembroVacio);
+				rama0_primosmaternos.add(miembroVacio);
+				rama0_primosmaternos.add(miembroVacio);
+				rama0_hermanos.add(miembroVacio);
+				rama0_hermanos.add(miembroVacio);
+			}
+			miemb.addObject("usuario",user);
+			
+			//RAMA 1
+			List<Miembro> rama1_tiospaternos = new ArrayList<Miembro>();
+			List<Miembro> rama1_padres = new ArrayList<Miembro>();
+			List<Miembro> rama1_tiosmaternos = new ArrayList<Miembro>();
+			if(miembros_rama1.isEmpty()){
+				rama1_tiospaternos.add(miembroVacio);
+				rama1_tiospaternos.add(miembroVacio);
+				rama1_tiosmaternos.add(miembroVacio);
+				rama1_tiosmaternos.add(miembroVacio);
+				rama1_padres.add(miembroVacio);
+				rama1_padres.add(miembroVacio);
+			}
+			
+			//RAMA 2
+			List<Miembro> rama2_abuelospaternos = new ArrayList<Miembro>();
+			List<Miembro> rama2_abuelosmaternos = new ArrayList<Miembro>();
+			if(miembros_rama2.isEmpty()){
+				rama2_abuelospaternos.add(miembroVacio);
+				rama2_abuelospaternos.add(miembroVacio);
+				rama2_abuelosmaternos.add(miembroVacio);
+				rama2_abuelosmaternos.add(miembroVacio);
+			}else{
+				rama2_abuelospaternos = miembroservice.getByDescendenciaRama(user.getId(), 2, "Rama paterna");
+				if(rama2_abuelospaternos.isEmpty()){
+					rama2_abuelospaternos.add(miembroVacio);
+					rama2_abuelospaternos.add(miembroVacio);
+					row_Abuelos_TiosPadres_a = "";
+				}else{ 
+					if(rama2_abuelospaternos.size()==1){
+						rama2_abuelospaternos.add(miembroVacio);
+					}	
+					if(!rama1_tiospaternos.isEmpty()){
+						row_Abuelos_TiosPadres_a = "abuelos-tios_izquierda.jpg";
+					}
+					row_Abuelos_TiosPadres_a = "abuelos-tios_simple.jpg";
+				}
+				rama2_abuelosmaternos = miembroservice.getByDescendenciaRama(user.getId(), 2, "Rama materna");
+				if(rama2_abuelosmaternos.isEmpty()){
+					rama2_abuelosmaternos.add(miembroVacio);
+					rama2_abuelosmaternos.add(miembroVacio);
+					row_Abuelos_TiosPadres_b = "";
+				}else{ 
+					if(rama2_abuelosmaternos.size()==1){
+						rama2_abuelosmaternos.add(miembroVacio);
+					}	
+					if(!rama1_tiosmaternos.isEmpty()){
+						row_Abuelos_TiosPadres_b = "abuelos-tios_derecha.jpg";
+					}
+					row_Abuelos_TiosPadres_b = "abuelos-tios_simple.jpg";
+				}				
+			}
+			miemb.addObject("rama2_abuelospaternos",rama2_abuelospaternos);
+			miemb.addObject("rama2_abuelosmaternos",rama2_abuelosmaternos);
+			miemb.addObject("rama2-1_row_a",row_Abuelos_TiosPadres_a);
+			miemb.addObject("rama2-1_row_b",row_Abuelos_TiosPadres_b);
+
 			miemb.setViewName("/arbol/arbol");
 		} else {
 			miemb = new ModelAndView("error");

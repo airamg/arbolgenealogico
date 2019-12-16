@@ -3,6 +3,7 @@ package edu.uoc.arbolgenealogico.service;
 import java.util.List;
 
 import javax.annotation.Resource;
+
 import edu.uoc.arbolgenealogico.model.MiembroDAOImpl;
 import edu.uoc.arbolgenealogico.pojo.Miembro;
 import edu.uoc.arbolgenealogico.service.interfaces.IMiembroService;
@@ -63,6 +64,13 @@ public class MiembroServiceImpl implements IMiembroService {
 	public List<Miembro> getByRamaArbol(int idusuario, int rama) {
 		List<Miembro> miembros=null;
 		miembros = miembroDAO.getByRamaArbol(idusuario, rama);
+		return miembros;
+	}
+	
+	@Override
+	public List<Miembro> getByDescendenciaRama(int idusuario, int rama, String descendencia) {
+		List<Miembro> miembros=null;
+		miembros = miembroDAO.getByDescendenciaRama(idusuario, rama, descendencia);
 		return miembros;
 	}
 

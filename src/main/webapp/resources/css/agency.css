@@ -659,6 +659,10 @@ section h3.section-subheading {
     border: 7px solid #fff;
 }
 
+.team-member-sinborde img {
+    margin: 0 auto;
+}
+
 .team-member h4 {
     margin-top: 25px;
     margin-bottom: 0;
