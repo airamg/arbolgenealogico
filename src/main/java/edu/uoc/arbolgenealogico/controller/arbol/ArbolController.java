@@ -38,127 +38,279 @@ public class ArbolController {
 		if(user!=null) {
 			
 			//sacar las listas de miembros que pertenecen al arbol del usuario online por cada rama
-			List<Miembro> miembros_rama0 = miembroservice.getByRamaArbol(user.getId(), 0);
-			List<Miembro> miembros_rama1 = miembroservice.getByRamaArbol(user.getId(), 1);
-			List<Miembro> miembros_rama2 = miembroservice.getByRamaArbol(user.getId(), 2);
-
-			//devolver el tipo de rama para unir cada miembro
+			Miembro miembroVacio = new Miembro();
+			Miembro usuario = new Miembro();
+			usuario.setNombre(user.getNombre());
+			usuario.setRutaImagen(user.getRuta_imagen());
+			usuario.setParentesco("Yo");
+			List<Miembro> rama0_primospaternos = miembroservice.getByDescendenciaRama(user.getId(), 0, "Rama paterna");
+			List<Miembro> rama0_primosmaternos = miembroservice.getByDescendenciaRama(user.getId(), 0, "Rama materna");
+			List<Miembro> rama0_hermanos = miembroservice.getByDescendenciaRama(user.getId(), 0, "");
+			List<Miembro> rama1_tiospaternos = miembroservice.getByDescendenciaRama(user.getId(), 1, "Rama paterna");
+			List<Miembro> rama1_tiosmaternos = miembroservice.getByDescendenciaRama(user.getId(), 1, "Rama materna");
+			List<Miembro> rama1_padres = miembroservice.getByDescendenciaRama(user.getId(), 1, "");
+			List<Miembro> rama2_abuelospaternos = miembroservice.getByDescendenciaRama(user.getId(), 2, "Rama paterna");
+			List<Miembro> rama2_abuelosmaternos = miembroservice.getByDescendenciaRama(user.getId(), 2, "Rama materna");
 			String row_Abuelos_TiosPadres_a = "";
 			String row_Abuelos_TiosPadres_b = "";
-			if(!miembros_rama2.isEmpty()){
-				row_Abuelos_TiosPadres_a = "abuelos-tios_izquierda.jpg";
-				row_Abuelos_TiosPadres_a = "abuelos-tios_derecha.jpg";				
-			}			
+			String row_TiosPadres_PrimosHermanos_a = "";
+			String row_TiosPadres_PrimosHermanos_b = "padres_simple.jpg";
+			String row_TiosPadres_PrimosHermanos_c = "";
+
+			//RAMA 2			
+			if(rama2_abuelospaternos.isEmpty()){
+				rama2_abuelospaternos.add(miembroVacio);
+				rama2_abuelospaternos.add(miembroVacio);
+				rama2_abuelospaternos.add(miembroVacio);
+			}else{ 
+				row_Abuelos_TiosPadres_a = "abuelos-tios_simple.jpg";
+				if(rama2_abuelospaternos.size()==1){
+					rama2_abuelospaternos.add(miembroVacio);
+					rama2_abuelospaternos.add(miembroVacio);
+				}else{
+					Miembro a1 = rama2_abuelospaternos.get(0);
+					Miembro a2 = rama2_abuelospaternos.get(1);
+					rama2_abuelospaternos.clear();
+					rama2_abuelospaternos.add(a1);
+					rama2_abuelospaternos.add(miembroVacio);
+					rama2_abuelospaternos.add(a2);					
+				}
+				if(!rama1_tiospaternos.isEmpty()){
+					row_Abuelos_TiosPadres_a = "abuelos-tios_izquierda.jpg";
+				}				
+			}
+			if(rama2_abuelosmaternos.isEmpty()){
+				rama2_abuelosmaternos.add(miembroVacio);
+				rama2_abuelosmaternos.add(miembroVacio);
+				rama2_abuelosmaternos.add(miembroVacio);
+			}else{ 
+				row_Abuelos_TiosPadres_b = "abuelos-tios_simple.jpg";
+				if(rama2_abuelosmaternos.size()==1){
+					rama2_abuelosmaternos.add(miembroVacio);
+					rama2_abuelosmaternos.add(miembroVacio);
+				}else{
+					Miembro a1 = rama2_abuelosmaternos.get(0);
+					Miembro a2 = rama2_abuelosmaternos.get(1);
+					rama2_abuelosmaternos.clear();
+					rama2_abuelosmaternos.add(a1);
+					rama2_abuelosmaternos.add(miembroVacio);
+					rama2_abuelosmaternos.add(a2);					
+				}	
+				if(!rama1_tiosmaternos.isEmpty()){
+					row_Abuelos_TiosPadres_b = "abuelos-tios_derecha.jpg";
+				}				
+			}
+			List<Miembro> lista_miembros_rama2 = new ArrayList<Miembro>();
+			lista_miembros_rama2.add(miembroVacio);
+			lista_miembros_rama2.add(miembroVacio);
+			for(Miembro m : rama2_abuelospaternos){
+				lista_miembros_rama2.add(m);
+			}
+			lista_miembros_rama2.add(miembroVacio);
+			for(Miembro m : rama2_abuelosmaternos){
+				lista_miembros_rama2.add(m);
+			}
+			lista_miembros_rama2.add(miembroVacio);
+			lista_miembros_rama2.add(miembroVacio);
+			miemb.addObject("lista_miembros_rama2",lista_miembros_rama2);
 			miemb.addObject("row_Abuelos_TiosPadres_a",row_Abuelos_TiosPadres_a);
 			miemb.addObject("row_Abuelos_TiosPadres_b",row_Abuelos_TiosPadres_b);
 			
-			String row_TiosPadres_PrimosHermanos_a = "";
-			String row_TiosPadres_PrimosHermanos_b = "";
-			String row_TiosPadres_PrimosHermanos_c = "";
-			if(!miembros_rama1.isEmpty()){
-				for (Miembro m : miembros_rama0) {
-					if(m.getDescendencia().equals("Rama paterna") && (m.getParentesco().equals("Primo") || m.getParentesco().equals("Prima"))) {
+			//RAMA 1			
+			if(rama1_tiospaternos.isEmpty()){
+				rama1_tiospaternos.add(miembroVacio);
+				rama1_tiospaternos.add(miembroVacio);
+				rama1_tiospaternos.add(miembroVacio);
+			}else{ 
+				row_TiosPadres_PrimosHermanos_a = "abuelos-tios_simple.jpg";
+				if(rama1_tiospaternos.size()==1){
+					Miembro t = rama1_tiospaternos.get(0);
+					rama1_tiospaternos.clear();
+					rama1_tiospaternos.add(miembroVacio);
+					rama1_tiospaternos.add(t);
+				}else{
+					Miembro t1 = rama1_tiospaternos.get(0);
+					Miembro t2 = rama1_tiospaternos.get(1);
+					rama1_tiospaternos.clear();
+					rama1_tiospaternos.add(t1);
+					rama1_tiospaternos.add(miembroVacio);
+					rama1_tiospaternos.add(t2);
+				}	
+				if(!rama0_primospaternos.isEmpty()){
+					if(rama0_primospaternos.size()==2){
+						row_TiosPadres_PrimosHermanos_a = "abuelos-tios_izquierda.jpg";
+					}else if(rama0_primospaternos.size()==3){
 						row_TiosPadres_PrimosHermanos_a = "abuelos-tios_completo.jpg";
-						break;
-					}else{
-						row_TiosPadres_PrimosHermanos_a = "abuelos-tios_simple.jpg";
-					}
-				}				
-				for (Miembro m : miembros_rama0) {
-					if(m.getParentesco().equals("Hermano") || m.getParentesco().equals("Hermana")) {
-						row_TiosPadres_PrimosHermanos_b = "padres_completo.jpg";
-						break;
-					}else{
-						row_TiosPadres_PrimosHermanos_b = "padres_simple.jpg";
-					}
-				}				
-				for (Miembro m : miembros_rama0) {
-					if(m.getDescendencia().equals("Rama materna") && (m.getParentesco().equals("Primo") || m.getParentesco().equals("Prima"))) {
-						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_completo.jpg";
-						break;
-					}else{
-						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_simple.jpg";
-					}
+					}										
 				}				
 			}
+			if(rama1_tiosmaternos.isEmpty()){
+				rama1_tiosmaternos.add(miembroVacio);
+				rama1_tiosmaternos.add(miembroVacio);
+				rama1_tiosmaternos.add(miembroVacio);
+			}else{ 
+				row_TiosPadres_PrimosHermanos_c = "abuelos-tios_simple.jpg";
+				if(rama1_tiosmaternos.size()==1){
+					rama1_tiosmaternos.add(miembroVacio);
+				}else{
+					Miembro t1 = rama1_tiosmaternos.get(0);
+					Miembro t2 = rama1_tiosmaternos.get(1);
+					rama1_tiosmaternos.clear();
+					rama1_tiosmaternos.add(t1);
+					rama1_tiosmaternos.add(miembroVacio);
+					rama1_tiosmaternos.add(t2);
+				}	
+				if(!rama0_primosmaternos.isEmpty()){
+					if(rama0_primosmaternos.size()==2){
+						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_derecha.jpg";
+					}else if(rama0_primosmaternos.size()==3){
+						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_completo.jpg";
+					}										
+				}				
+			}
+			if(rama1_padres.isEmpty()){
+				rama1_padres.add(miembroVacio);
+				rama1_padres.add(miembroVacio);
+				rama1_padres.add(miembroVacio);
+				rama1_padres.add(miembroVacio);
+				rama1_padres.add(miembroVacio);
+			}else{				
+				if(rama1_padres.size()==1){
+					if(rama1_padres.get(0).getParentesco().equals("Padre")){
+						Miembro padre = rama1_padres.get(0);
+						rama1_padres.clear();
+						rama1_padres.add(padre);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+					}else{
+						Miembro madre = rama1_padres.get(0);
+						rama1_padres.clear();
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(madre);						
+					}					
+				}else{
+					if(rama1_padres.get(0).getParentesco().equals("Padre")){
+						Miembro padre = rama1_padres.get(0);
+						Miembro madre = rama1_padres.get(1);
+						rama1_padres.clear();
+						rama1_padres.add(padre);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(madre);
+					}else{
+						Miembro madre = rama1_padres.get(0);
+						Miembro padre = rama1_padres.get(1);
+						rama1_padres.clear();
+						rama1_padres.add(padre);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(miembroVacio);
+						rama1_padres.add(madre);						
+					}
+				}
+				if(!rama0_hermanos.isEmpty()){
+					if(rama0_hermanos.size()==1){
+						row_TiosPadres_PrimosHermanos_b = "padres_izquierda.jpg";
+					}else if(rama0_hermanos.size()==2){
+						row_TiosPadres_PrimosHermanos_b = "padres_completo.jpg";
+					}										
+				}				
+			}
+			List<Miembro> lista_miembros_rama1 = new ArrayList<Miembro>();
+			for(Miembro m : rama1_tiospaternos){
+				lista_miembros_rama1.add(m);
+			}
+			for(Miembro m : rama1_padres){
+				lista_miembros_rama1.add(m);
+			}
+			for(Miembro m : rama1_tiosmaternos){
+				lista_miembros_rama1.add(m);
+			}
+			miemb.addObject("lista_miembros_rama1",lista_miembros_rama1);
 			miemb.addObject("row_TiosPadres_PrimosHermanos_a",row_TiosPadres_PrimosHermanos_a);
 			miemb.addObject("row_TiosPadres_PrimosHermanos_b",row_TiosPadres_PrimosHermanos_b);
-			miemb.addObject("row_TiosPadres_PrimosHermanos_c",row_TiosPadres_PrimosHermanos_c);	
-			
-			//ordenar las listas para mostrar cada miembro en su sitio del arbol
-			Miembro miembroVacio = new Miembro();
-			
+			miemb.addObject("row_TiosPadres_PrimosHermanos_c",row_TiosPadres_PrimosHermanos_c);
+
 			//RAMA 0
-			List<Miembro> rama0_primospaternos = new ArrayList<Miembro>();
-			List<Miembro> rama0_hermanos = new ArrayList<Miembro>();			
-			List<Miembro> rama0_primosmaternos = new ArrayList<Miembro>();
-			if(miembros_rama0.isEmpty()){
+			if(rama0_primospaternos.isEmpty()){
 				rama0_primospaternos.add(miembroVacio);
 				rama0_primospaternos.add(miembroVacio);
 				rama0_primospaternos.add(miembroVacio);
-				rama0_primosmaternos.add(miembroVacio);
-				rama0_primosmaternos.add(miembroVacio);
-				rama0_primosmaternos.add(miembroVacio);
-				rama0_hermanos.add(miembroVacio);
-				rama0_hermanos.add(miembroVacio);
-			}
-			miemb.addObject("usuario",user);
-			
-			//RAMA 1
-			List<Miembro> rama1_tiospaternos = new ArrayList<Miembro>();
-			List<Miembro> rama1_padres = new ArrayList<Miembro>();
-			List<Miembro> rama1_tiosmaternos = new ArrayList<Miembro>();
-			if(miembros_rama1.isEmpty()){
-				rama1_tiospaternos.add(miembroVacio);
-				rama1_tiospaternos.add(miembroVacio);
-				rama1_tiosmaternos.add(miembroVacio);
-				rama1_tiosmaternos.add(miembroVacio);
-				rama1_padres.add(miembroVacio);
-				rama1_padres.add(miembroVacio);
-			}
-			
-			//RAMA 2
-			List<Miembro> rama2_abuelospaternos = new ArrayList<Miembro>();
-			List<Miembro> rama2_abuelosmaternos = new ArrayList<Miembro>();
-			if(miembros_rama2.isEmpty()){
-				rama2_abuelospaternos.add(miembroVacio);
-				rama2_abuelospaternos.add(miembroVacio);
-				rama2_abuelosmaternos.add(miembroVacio);
-				rama2_abuelosmaternos.add(miembroVacio);
-			}else{
-				rama2_abuelospaternos = miembroservice.getByDescendenciaRama(user.getId(), 2, "Rama paterna");
-				if(rama2_abuelospaternos.isEmpty()){
-					rama2_abuelospaternos.add(miembroVacio);
-					rama2_abuelospaternos.add(miembroVacio);
-					row_Abuelos_TiosPadres_a = "";
-				}else{ 
-					if(rama2_abuelospaternos.size()==1){
-						rama2_abuelospaternos.add(miembroVacio);
-					}	
-					if(!rama1_tiospaternos.isEmpty()){
-						row_Abuelos_TiosPadres_a = "abuelos-tios_izquierda.jpg";
-					}
-					row_Abuelos_TiosPadres_a = "abuelos-tios_simple.jpg";
-				}
-				rama2_abuelosmaternos = miembroservice.getByDescendenciaRama(user.getId(), 2, "Rama materna");
-				if(rama2_abuelosmaternos.isEmpty()){
-					rama2_abuelosmaternos.add(miembroVacio);
-					rama2_abuelosmaternos.add(miembroVacio);
-					row_Abuelos_TiosPadres_b = "";
-				}else{ 
-					if(rama2_abuelosmaternos.size()==1){
-						rama2_abuelosmaternos.add(miembroVacio);
-					}	
-					if(!rama1_tiosmaternos.isEmpty()){
-						row_Abuelos_TiosPadres_b = "abuelos-tios_derecha.jpg";
-					}
-					row_Abuelos_TiosPadres_b = "abuelos-tios_simple.jpg";
+			}else{ 
+				if(rama0_primospaternos.size()==1){
+					Miembro p1 = rama0_primospaternos.get(0);
+					rama0_primospaternos.clear();
+					rama0_primospaternos.add(miembroVacio);
+					rama0_primospaternos.add(p1);
+					rama0_primospaternos.add(miembroVacio);
+				}else if(rama0_primospaternos.size()==2){
+					Miembro p1 = rama0_primospaternos.get(0);
+					Miembro p2 = rama0_primospaternos.get(1);
+					rama0_primospaternos.clear();
+					rama0_primospaternos.add(p1);
+					rama0_primospaternos.add(p2);
+					rama0_primospaternos.add(miembroVacio);
 				}				
 			}
-			miemb.addObject("rama2_abuelospaternos",rama2_abuelospaternos);
-			miemb.addObject("rama2_abuelosmaternos",rama2_abuelosmaternos);
-			miemb.addObject("rama2-1_row_a",row_Abuelos_TiosPadres_a);
-			miemb.addObject("rama2-1_row_b",row_Abuelos_TiosPadres_b);
+			if(rama0_primosmaternos.isEmpty()){
+				rama0_primosmaternos.add(miembroVacio);
+				rama0_primosmaternos.add(miembroVacio);
+				rama0_primosmaternos.add(miembroVacio);
+			}else{ 
+				if(rama0_primosmaternos.size()==1){
+					Miembro p1 = rama0_primosmaternos.get(0);
+					rama0_primosmaternos.clear();
+					rama0_primosmaternos.add(miembroVacio);
+					rama0_primosmaternos.add(p1);
+					rama0_primosmaternos.add(miembroVacio);
+				}else if(rama0_primosmaternos.size()==2){
+					Miembro p1 = rama0_primosmaternos.get(0);
+					Miembro p2 = rama0_primosmaternos.get(1);
+					rama0_primosmaternos.clear();
+					rama0_primosmaternos.add(miembroVacio);
+					rama0_primosmaternos.add(p1);
+					rama0_primosmaternos.add(p2);					
+				}				
+			}
+			if(rama0_hermanos.isEmpty()){
+				rama0_hermanos.add(miembroVacio);
+				rama0_hermanos.add(usuario);
+				rama0_hermanos.add(miembroVacio);
+			}else{ 
+				if(rama0_hermanos.size()==1){
+					Miembro h = rama0_hermanos.get(0);
+					rama0_hermanos.clear();
+					rama0_hermanos.add(h);
+					rama0_hermanos.add(usuario);
+					rama0_hermanos.add(miembroVacio);
+				}else {
+					Miembro h1 = rama0_hermanos.get(0);
+					Miembro h2 = rama0_hermanos.get(1);
+					rama0_hermanos.clear();
+					rama0_hermanos.add(h1);
+					rama0_hermanos.add(usuario);
+					rama0_hermanos.add(h2);					
+				}				
+			}
+			List<Miembro> lista_miembros_rama0 = new ArrayList<Miembro>();
+			for(Miembro m : rama0_primospaternos){
+				lista_miembros_rama0.add(m);
+			}
+			lista_miembros_rama0.add(miembroVacio);
+			for(Miembro m : rama0_hermanos){
+				lista_miembros_rama0.add(m);
+			}
+			lista_miembros_rama0.add(miembroVacio);
+			for(Miembro m : rama0_primosmaternos){
+				lista_miembros_rama0.add(m);
+			}
+			miemb.addObject("lista_miembros_rama0",lista_miembros_rama0);		
 
 			miemb.setViewName("/arbol/arbol");
 		} else {
