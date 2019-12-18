@@ -57,9 +57,6 @@ public class HomeController {
 				user.setUltima_conexion(new Date(Calendar.getInstance().getTime().getTime()));
 				user.setOnline(1);
 				userservice.update(user);
-				//redirigimos a la pagina principal del usuario
-				request.setAttribute("usuariousername", usuario.getUsername());
-				request.setAttribute("usuariopass", usuario.getPass());
 				model = "redirect:/usuarios/cuenta";						
 			} else {
 				model = "error";

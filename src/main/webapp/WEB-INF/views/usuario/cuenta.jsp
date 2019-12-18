@@ -37,6 +37,29 @@
 							</div>
 						</div>
 					</li>
+					<li class="timeline-inverted">
+						<div class="timeline-image">
+							<img class="img-circle img-responsive"
+								src="${pageContext.request.contextPath}/resources/images/usuario/miembros.png"
+								height=156px; width=156px; alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>Miembros de mi árbol</h4>
+								<c:choose>
+									<c:when test="${listaMiembrosVacia}">
+										<p class="text-muted">No has añadido ningún miembro todavía.</p>
+									</c:when>
+						    		<c:otherwise></c:otherwise>
+								</c:choose>									
+							</div>
+							<div class="timeline-body">
+								<c:forEach var="miembro" items="${lista_miembros}">
+									<p>${miembro.nombre} ${miembro.apellido} - ${miembro.parentesco}</p>
+								</c:forEach>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>

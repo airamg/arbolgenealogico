@@ -35,15 +35,21 @@ public class MiembrosController {
 		//comprobar quien es el usuario online
 		Usuario user = usuarioservice.getByOnline();
 		if(user!=null) {
+			
 			//sacar la lista de miembros que pertenecen al arbol del usuario online
 			List<Miembro> miembros = miembroservice.getAll(user.getId());		
 			miemb.addObject("lista_miembros",miembros);
-			//si no hay miembros no debe mostrarse el icono de visualizar arbol
+			
+			//si no hay miembros no debe mostrarse el icono de visualizar arbol ni de busqueda
+			boolean sinMiembros = false;
 			if(miembros.isEmpty()){
-				miemb.addObject("sinmiembros", "S");
-			}else{
-				miemb.addObject("sinmiembros", "N");
-			}			
+				sinMiembros = true;
+			}
+			miemb.addObject("sinMiembros", sinMiembros);
+
+			Miembro miembro = new Miembro();
+			miemb.addObject("miembro", miembro);
+
 			miemb.setViewName("/arbol/index");
 		} else {
 			miemb = new ModelAndView("error");

@@ -6,21 +6,59 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2 class="section-heading2">GESTIÓN DE MIEMBROS DEL ÁRBOL</h2>
-				<div class="team-member">
-					<c:choose>
-						<c:when test="${sinmiembros=='N'}">
-							<ul class="list-inline social-buttons">						
-								<li><a href="miembros/arbol"><i class="fa fa-tree fa-3x fa-stack-2x text-primary"></i></a></li>
-							</ul>
-						</c:when>
-						<c:otherwise></c:otherwise>
-					</c:choose>					
-					<ul class="list-inline social-buttons">
-						<li><a href="miembros/nuevo"><i class="fa fa-plus fa-3x fa-stack-2x text-primary"></i></a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
+		<div class="row">
+			<c:choose>
+				<c:when test="${sinMiembros}">
+					<div class="col-lg-12 text-center">
+						<div class="team-member">				
+							<ul class="list-inline social-buttons">
+								<li><a href="miembros/nuevo"><i class="fa fa-plus fa-3x fa-stack-2x text-primary"></i></a></li>
+							</ul>
+						</div>
+					</div>		
+				</c:when>
+				<c:otherwise>
+					<div class="col-sm-2 text-center">
+						<div class="team-member-sinborde"></div>
+					</div>
+					<div class="col-sm-1 text-center">
+						<div class="team-member">
+							<ul class="list-inline social-buttons">
+								<li><a href="miembros/nuevo"><i class="fa fa-plus fa-3x fa-stack-2x text-primary"></i></a></li>
+							</ul>							
+						</div>
+					</div>
+					<div class="col-sm-1 text-center">
+						<div class="team-member">
+							<ul class="list-inline social-buttons">
+								<li><a href="miembros/arbol"><i class="fa fa-tree fa-3x fa-stack-2x text-primary"></i></a></li>
+							</ul>							
+						</div>
+					</div>
+					<div class="col-sm-1 text-center">
+						<div class="team-member-sinborde"></div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="team-member">							
+							<form:form id="busquedasForm" method="post" action="miembros/buscar" modelAttribute="miembro">
+								<div class="form-group">
+									<form:input style="width:380px; height:45px;" id="busqueda" name="busqueda" path="busqueda" placeholder="¿No encuentras algo?" />
+								</div>	
+							</form:form>
+						</div>
+					</div>
+					<div class="col-sm-1 text-center">
+						<div class="team-member">
+							<ul class="list-inline social-buttons">
+								<li><a href="miembros/buscar"><i class="fa fa-search fa-3x fa-stack-2x text-primary"></i></a></li>
+							</ul>							
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>	
+		</div>	
 		<div class="row">
 			<c:forEach var="miembro" items="${lista_miembros}">		
 			<div class="col-sm-4">
