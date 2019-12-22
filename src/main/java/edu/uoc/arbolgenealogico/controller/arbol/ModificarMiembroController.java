@@ -2,9 +2,6 @@ package edu.uoc.arbolgenealogico.controller.arbol;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -64,13 +61,11 @@ public class ModificarMiembroController {
 	
 	/**
 	 * Método de modificacion de datos que redirige a la pantalla inicial del arbol de usuario y lo modifica
-	 * @param request
-	 * @param response
 	 * @param miembro
 	 * @return String
 	 */
 	@RequestMapping(value = "/miembros/modificar", method = RequestMethod.POST)
-	public String executeModificarMiembro(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("miembro") Miembro miembro) {
+	public String executeModificarMiembro(@ModelAttribute("miembro") Miembro miembro) {
 
 		String model = null;
 		

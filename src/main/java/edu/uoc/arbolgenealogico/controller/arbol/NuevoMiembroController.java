@@ -2,9 +2,6 @@ package edu.uoc.arbolgenealogico.controller.arbol;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,12 +40,10 @@ public class NuevoMiembroController {
 
 	/**
 	 * Método que muestra la pagina de nuevo miembro
-	 * @param request
-	 * @param response
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/miembros/nuevo", method = RequestMethod.GET)
-	public ModelAndView displayNuevoMiembro(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView displayNuevoMiembro() {
 		
 		ModelAndView model = new ModelAndView("/arbol/nuevomiembro");
 		Miembro miembro = new Miembro();
@@ -67,13 +62,11 @@ public class NuevoMiembroController {
 
 	/**
 	 * Método que crea un nuevo miembro y redirige a la página inicial arbol de cada usuario con todos los miembros
-	 * @param request
-	 * @param response
 	 * @param miembro
 	 * @return String
 	 */
 	@RequestMapping(value = "/miembros/nuevo", method = RequestMethod.POST)
-	public String executeNuevoMiembro(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("miembro") Miembro miembro) {
+	public String executeNuevoMiembro(@ModelAttribute("miembro") Miembro miembro) {
 		
 		String model = null;
 

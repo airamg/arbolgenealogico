@@ -40,22 +40,22 @@
 					<div class="col-sm-1 text-center">
 						<div class="team-member-sinborde"></div>
 					</div>
-					<div class="col-sm-4 text-center">
-						<div class="team-member">							
-							<form:form id="busquedasForm" method="post" action="miembros/buscar" modelAttribute="miembro">
+					<form:form id="busquedasForm" method="post" action="miembros/buscar" modelAttribute="miembro">
+						<div class="col-sm-4 text-center">
+							<div class="team-member">							
 								<div class="form-group">
-									<form:input style="width:380px; height:45px;" id="busqueda" name="busqueda" path="busqueda" placeholder="¿No encuentras algo?" />
+									<form:input style="width:380px; height:45px;" id="historialMedico" name="historialMedico" path="historialMedico" placeholder="¿Qué quieres buscar en el historial médico familiar?" />
 								</div>	
-							</form:form>
+							</div>
 						</div>
-					</div>
-					<div class="col-sm-1 text-center">
-						<div class="team-member">
-							<ul class="list-inline social-buttons">
-								<li><a href="miembros/buscar"><i class="fa fa-search fa-3x fa-stack-2x text-primary"></i></a></li>
-							</ul>							
+						<div class="col-sm-1 text-center">
+							<div class="team-member">
+								<ul class="list-inline social-buttons">
+									<li><button style="width:50px;height:44px;background-color:black;" type="submit" class="fa fa-search fa-3x fa-stack-2x-button text-primary"></button></li>
+								</ul>							
+							</div>
 						</div>
-					</div>
+					</form:form>
 				</c:otherwise>
 			</c:choose>	
 		</div>	

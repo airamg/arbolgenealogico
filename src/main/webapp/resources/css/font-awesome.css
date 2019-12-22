@@ -175,6 +175,14 @@
 .fa-stack-2x {
   font-size: 2em;
 }
+.fa-stack-2x-button {
+  position: static;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
 .fa-inverse {
   color: #ffffff;
 }

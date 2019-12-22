@@ -95,9 +95,9 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public List<Miembro> getByHistorialMedico(int idusuario, String enfermedad) {
 		List<Miembro> miembros = null;
-		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and historial_medico=?";
+		final String SQL = "SELECT miembro.id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,descripcion,tipo_rama FROM miembro INNER JOIN parentesco ON miembro.parentesco=parentesco.id INNER JOIN descendencia ON miembro.descendencia=descendencia.id WHERE usuario=? and historial_medico like ?";
 		try {
-			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, enfermedad }, new MiembroJoinMapper());
+			miembros = jdbctemplate.query(SQL, new Object[] { idusuario, "%"+enfermedad+"%" }, new MiembroJoinMapper());
 		} catch (EmptyResultDataAccessException e) {
 			miembros = null;
 		}

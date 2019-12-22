@@ -3,9 +3,6 @@ package edu.uoc.arbolgenealogico.controller;
 import java.sql.Date;
 import java.util.Calendar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,12 +23,10 @@ public class HomeController {
 
 	/**
 	 * Método para el login del usuario
-	 * @param request
-	 * @param response
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
-	public ModelAndView displayLogin(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView displayLogin() {
 		ModelAndView model = new ModelAndView("home");
 		Usuario user = new Usuario();
 		model.addObject("usuario", user);
@@ -40,13 +35,11 @@ public class HomeController {
 
 	/**
 	 * Método de login que redirige a la página principal del usuario logeado
-	 * @param request
-	 * @param response
 	 * @param usuario
 	 * @return String
 	 */
 	@RequestMapping(value = {"/","/home"}, method = RequestMethod.POST)
-	public String executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("usuario") Usuario usuario) {
+	public String executeLogin(@ModelAttribute("usuario") Usuario usuario) {
 		String model = null;
 		//comprobamos que el usuario existe en la bd
 		Usuario user = userservice.getByUsername(usuario.getUsername());

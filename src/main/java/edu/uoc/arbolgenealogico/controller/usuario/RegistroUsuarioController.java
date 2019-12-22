@@ -1,8 +1,5 @@
 package edu.uoc.arbolgenealogico.controller.usuario;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -23,12 +20,10 @@ public class RegistroUsuarioController {
 
 	/**
 	 * Método para la página principal con el registro de usuario
-	 * @param request
-	 * @param response
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/registrousuario", method = RequestMethod.GET)
-	public ModelAndView displayRegistroCliente(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView displayRegistroCliente() {
 		ModelAndView model = new ModelAndView("/usuario/registro");
 		Usuario usuario = new Usuario();
 		model.addObject("usuario", usuario);
@@ -37,13 +32,11 @@ public class RegistroUsuarioController {
 
 	/**
 	 * Método de registro que redirige a la página de usuarios
-	 * @param request
-	 * @param response
 	 * @param usuario
 	 * @return String
 	 */
 	@RequestMapping(value = "/registrousuario", method = RequestMethod.POST)
-	public String executeRegistroUsuario(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("usuario") Usuario usuario) {
+	public String executeRegistroUsuario(@ModelAttribute("usuario") Usuario usuario) {
 		String model = null;
 		//comprobar quien esta online
 		Usuario user = userservice.getByOnline();

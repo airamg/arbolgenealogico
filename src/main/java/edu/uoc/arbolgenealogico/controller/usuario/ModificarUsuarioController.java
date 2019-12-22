@@ -1,8 +1,5 @@
 package edu.uoc.arbolgenealogico.controller.usuario;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,13 +34,11 @@ public class ModificarUsuarioController {
 	
 	/**
 	 * Método de modificacion de datos que redirige a la cuenta de usuario
-	 * @param request
-	 * @param response
 	 * @param usuario
 	 * @return String
 	 */
 	@RequestMapping(value = "/usuarios/modificar", method = RequestMethod.POST)
-	public String executeModificarUsuario(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("usuario") Usuario usuario) {
+	public String executeModificarUsuario(@ModelAttribute("usuario") Usuario usuario) {
 
 		String model = null;
 		// comprobar quien es el usuario online
