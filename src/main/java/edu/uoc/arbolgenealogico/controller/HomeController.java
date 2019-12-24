@@ -46,6 +46,12 @@ public class HomeController {
 		if(user!=null) {
 			//si existe, comprobamos su pass
 			if((user.getPass()).equals(usuario.getPass()) && (user.getOnline()==0)) {
+				//comprobamos si hay otro usuario online para cerrarle sesion
+				Usuario userOnline = userservice.getByOnline();
+				if(userOnline!=null) {
+					userOnline.setOnline(0);
+					userservice.update(userOnline);
+				}
 				//actualizar la base de datos cambiando online a 1 y la hora de conexion
 				user.setUltima_conexion(new Date(Calendar.getInstance().getTime().getTime()));
 				user.setOnline(1);

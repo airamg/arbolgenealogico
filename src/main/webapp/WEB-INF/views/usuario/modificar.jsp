@@ -33,10 +33,6 @@
 								<form:input id="apellidos" name="apellidos" path="apellidos"
 									placeholder="Apellidos" value="${usuario.apellidos}"/>
 							</div>
-							<div class="form-group">
-								<form:input id="email" name="email" path="email"
-									placeholder="Email" value="${usuario.email}"/>
-							</div>
 							<div class="clearfix"></div>
 							<div class="col-lg-12 text-center">
 								<button type="submit" class="btn btn-xl">Guardar</button>

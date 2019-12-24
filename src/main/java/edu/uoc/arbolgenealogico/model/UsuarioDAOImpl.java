@@ -24,16 +24,16 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
 	@Override
 	public int create(Usuario u) {
 		int codigo = -1;
-		final String SQL = "INSERT INTO usuario(username,pass,nombre,apellidos,email,ruta_imagen,online,ultima_conexion) VALUES (?,?,?,?,?,?,?,?)";
+		final String SQL = "INSERT INTO usuario(username,pass,nombre,apellidos,ruta_imagen,online,ultima_conexion) VALUES (?,?,?,?,?,?,?)";
 		codigo = jdbctemplate.update(SQL, u.getUsername(), u.getPass(), u.getNombre(), u.getApellidos(),
-				u.getEmail(), u.getRuta_imagen(), u.getOnline(), u.getUltima_conexion());
+				u.getRuta_imagen(), u.getOnline(), u.getUltima_conexion());
 		return codigo;
 	}
 
 	@Override
 	public Usuario getById(final int codigo) {
 		Usuario u = null;
-		final String SQL = "SELECT id,username,pass,nombre,apellidos,email,ruta_imagen,online,ultima_conexion FROM usuario WHERE id=?";
+		final String SQL = "SELECT id,username,pass,nombre,apellidos,ruta_imagen,online,ultima_conexion FROM usuario WHERE id=?";
 		try {
 			u = jdbctemplate.queryForObject(SQL, new Object[] { codigo },
 					new UsuarioMapper());
@@ -46,7 +46,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
 	@Override
 	public Usuario getByUsername(String username) {
 		Usuario u = null;
-		final String SQL = "SELECT id,username,pass,nombre,apellidos,email,ruta_imagen,online,ultima_conexion FROM usuario WHERE username=?";
+		final String SQL = "SELECT id,username,pass,nombre,apellidos,ruta_imagen,online,ultima_conexion FROM usuario WHERE username=?";
 		try {
 			u = jdbctemplate.queryForObject(SQL, new Object[] { username },
 					new UsuarioMapper());
@@ -60,7 +60,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
 	public Usuario getByOnline() {
 		Usuario u = null;
 		int online = 1;
-		final String SQL = "SELECT id,username,pass,nombre,apellidos,email,ruta_imagen,online,ultima_conexion FROM usuario WHERE online=?";
+		final String SQL = "SELECT id,username,pass,nombre,apellidos,ruta_imagen,online,ultima_conexion FROM usuario WHERE online=?";
 		try {
 			u = jdbctemplate.queryForObject(SQL, new Object[] { online },
 					new UsuarioMapper());
@@ -73,7 +73,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
 	@Override
 	public List<Usuario> getAll() {
 		List<Usuario> usuarios = null;
-		final String SQL = "SELECT id,username,pass,nombre,apellidos,email,ruta_imagen,online,ultima_conexion FROM usuario";
+		final String SQL = "SELECT id,username,pass,nombre,apellidos,ruta_imagen,online,ultima_conexion FROM usuario";
 		try {
 			usuarios = jdbctemplate.query(SQL, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -85,9 +85,9 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
 	@Override
 	public int update(Usuario u) {
 		int codigo = -1;
-		final String SQL = "UPDATE usuario SET username=?,pass=?,nombre=?,apellidos=?,email=?,ruta_imagen=?,online=?,ultima_conexion=? WHERE id=?";
+		final String SQL = "UPDATE usuario SET username=?,pass=?,nombre=?,apellidos=?,ruta_imagen=?,online=?,ultima_conexion=? WHERE id=?";
 		codigo = jdbctemplate.update(SQL, u.getUsername(), u.getPass(),
-				u.getNombre(), u.getApellidos(), u.getEmail(), u.getRuta_imagen(),
+				u.getNombre(), u.getApellidos(), u.getRuta_imagen(),
 				u.getOnline(), u.getUltima_conexion(), u.getId());
 		return codigo;
 	}

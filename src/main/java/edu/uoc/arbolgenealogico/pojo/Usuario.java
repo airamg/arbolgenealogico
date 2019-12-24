@@ -10,7 +10,6 @@ public class Usuario  {
 	private String pass;
 	private String nombre;
 	private String apellidos;
-	private String email;
 	private String ruta_imagen;
 	private Date ultima_conexion;
 	private int online; // 1: conectado - 0: desconectado
@@ -20,7 +19,6 @@ public class Usuario  {
 		setPass("");
 		setNombre("");
 		setApellidos("");
-		setEmail("");
 		setRuta_imagen("resources/images/usuario/default.png");
 		setUltima_conexion(new Date(Calendar.getInstance().getTime().getTime()));
 		setOnline(0);
@@ -64,14 +62,6 @@ public class Usuario  {
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 	public String getRuta_imagen() {

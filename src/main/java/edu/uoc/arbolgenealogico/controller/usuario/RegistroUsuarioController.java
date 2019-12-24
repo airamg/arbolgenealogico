@@ -37,29 +37,30 @@ public class RegistroUsuarioController {
 	 */
 	@RequestMapping(value = "/registrousuario", method = RequestMethod.POST)
 	public String executeRegistroUsuario(@ModelAttribute("usuario") Usuario usuario) {
+		
 		String model = null;
-		//comprobar quien esta online
-		Usuario user = userservice.getByOnline();
-		if(user==null) {
-			//comprobar que el nuevo usuario no este repetido
-			Usuario u = userservice.getByUsername(usuario.getUsername());
-			if(u==null) {
-				//guardar en la bd el nuevo usuario
-				Usuario usu = new Usuario();			
-				usu.setUsername(usuario.getUsername());
-				usu.setPass(usuario.getPass());
-				usu.setNombre(usuario.getNombre());
-				usu.setApellidos(usuario.getApellidos());
-				usu.setEmail(usuario.getEmail());
-				usu.setOnline(1);
-				userservice.create(usu);
-				model = "redirect:/usuarios/cuenta";		
-			} else {
-				model = "error";	
-			}
+
+		//comprobar que el nuevo usuario no este repetido
+		Usuario u = userservice.getByUsername(usuario.getUsername());
+		if(u==null) {
+			//comprobamos si hay otro usuario online para cerrarle sesion
+			Usuario userOnline = userservice.getByOnline();
+			if(userOnline!=null) {
+				userOnline.setOnline(0);
+				userservice.update(userOnline);
+			}			
+			//guardar en la bd el nuevo usuario
+			Usuario usu = new Usuario();			
+			usu.setUsername(usuario.getUsername());
+			usu.setPass(usuario.getPass());
+			usu.setNombre(usuario.getNombre());
+			usu.setApellidos(usuario.getApellidos());
+			usu.setOnline(1);
+			userservice.create(usu);
+			model = "redirect:/usuarios/cuenta";		
 		} else {
 			model = "error";	
-		}
+		}		
 		
 		return model;
 	}

@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `pass` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellidos` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `email` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ruta_imagen` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
   `online` int(1) DEFAULT NULL,
   `ultima_conexion` date DEFAULT NULL,
@@ -25,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `username`, `pass`, `nombre`, `apellidos`, `email`, `ruta_imagen`, `online`, `ultima_conexion`) VALUES
-(1, 'maria', 'maria', 'Maria', 'Gonzalez Palacios', 'mgonzalezpalac@uoc.edu', 'resources/images/usuario/default.png', 0, '2019-12-03');
+INSERT INTO `usuario` (`id`, `username`, `pass`, `nombre`, `apellidos`, `ruta_imagen`, `online`, `ultima_conexion`) VALUES
+(1, 'maria', 'maria', 'Maria', 'Gonzalez Palacios', 'resources/images/usuario/default.png', 0, '2019-12-03');
 
 
 -- --------------------------------------------------------
