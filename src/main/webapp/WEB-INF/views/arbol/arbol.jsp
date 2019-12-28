@@ -18,7 +18,7 @@
 						<c:otherwise>
 							<div class="team-member">
 								<img src="${pageContext.request.contextPath}/${miembro.rutaImagen}" height=100px; width=100px; class="img-responsive img-circle" alt="">
-								<p class="text-muted">${miembro.parentesco}<br/>${miembro.nombre}</p>
+								<p class="text-muted">${miembro.parentesco}<br/>${miembro.nombre}<br/>${miembro.edad}<br/>${miembro.historialMedico}</p>
 							</div>
 						</c:otherwise>
 					</c:choose>									
@@ -34,7 +34,7 @@
 			</div>
 			<div class="col-sm-3" style="text-align:center">					
 				<div class="team-member-sinborde">
-					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_Abuelos_TiosPadres_a}" height=250px; width=250px; alt="">
+					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_Abuelos_TiosPadres_a}" height=250px; width=210px; alt="">
 				</div>				
 			</div>
 			<div class="col-sm-1">					
@@ -42,7 +42,7 @@
 			</div>
 			<div class="col-sm-3">					
 				<div class="team-member-sinborde" style="text-align:center">
-					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_Abuelos_TiosPadres_b}" height=250px; width=250px; alt="">
+					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_Abuelos_TiosPadres_b}" height=250px; width=210px; alt="">
 				</div>				
 			</div>
 			<div class="col-sm-1">					
@@ -57,12 +57,14 @@
 				<div class="col-sm-1">					
 					<c:choose>
 						<c:when test="${miembro.rutaImagen==''}">
-							<div class="team-member-sinborde"></div>
+							<div class="team-member-sinborde">
+								<p class="text-muted"><br/><br/></p>
+							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="team-member">
 								<img src="${pageContext.request.contextPath}/${miembro.rutaImagen}" height=100px; width=100px; class="img-responsive img-circle" alt="">
-								<p class="text-muted">${miembro.parentesco}<br/>${miembro.nombre}</p>
+								<p class="text-muted">${miembro.parentesco}<br/>${miembro.nombre}<br/>${miembro.edad}<br/>${miembro.historialMedico}</p>
 							</div>
 						</c:otherwise>
 					</c:choose>									
@@ -72,7 +74,7 @@
 		<div class="row">
 			<div class="col-sm-3">					
 				<div class="team-member-sinborde" style="text-align:center">
-					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_TiosPadres_PrimosHermanos_a}" height=250px; width=250px; alt="">
+					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_TiosPadres_PrimosHermanos_a}" height=250px; width=210px; alt="">
 				</div>				
 			</div>
 			<div class="col-sm-5">					
@@ -82,7 +84,7 @@
 			</div>
 			<div class="col-sm-3">					
 				<div class="team-member-sinborde" style="text-align:center">
-					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_TiosPadres_PrimosHermanos_c}" height=250px; width=250px; alt="">
+					<img src="${pageContext.request.contextPath}/resources/images/arbol/${row_TiosPadres_PrimosHermanos_c}" height=250px; width=210px; alt="">
 				</div>				
 			</div>
 		</div>
@@ -96,7 +98,7 @@
 						<c:otherwise>
 							<div class="team-member">
 								<img src="${pageContext.request.contextPath}/${miembro.rutaImagen}" height=100px; width=100px; class="img-responsive img-circle" alt="">
-								<p class="text-muted">${miembro.parentesco}<br/>${miembro.nombre}</p>
+								<p class="text-muted">${miembro.parentesco}<br/>${miembro.nombre}<br/>${miembro.edad}<br/>${miembro.historialMedico}</p>
 							</div>
 						</c:otherwise>
 					</c:choose>									

@@ -12,7 +12,7 @@ public interface IUsuarioService {
 	public Usuario getById(int codigo);
 	
 	public Usuario getByUsername(String username);
-	
+
 	public Usuario getByOnline();
 
 	public List<Usuario> getAll();

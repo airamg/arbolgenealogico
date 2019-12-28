@@ -19,6 +19,7 @@ public class UsuarioMapper implements RowMapper<Usuario> {
 		usuario.setRuta_imagen(rs.getString("ruta_imagen"));
 		usuario.setOnline(rs.getInt("online"));
 		usuario.setUltima_conexion(rs.getDate("ultima_conexion"));
+		usuario.setAnio_nacimiento(rs.getString("anio_nacimiento"));
 	    return usuario;
 	}	
 }

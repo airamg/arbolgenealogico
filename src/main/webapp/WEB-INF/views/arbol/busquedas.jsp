@@ -20,7 +20,7 @@
 				<c:otherwise>
 					<div class="col-lg-12 text-center">
 						<div class="team-member">				
-							<p>Hay ${numMiembros} miembro(s) que tiene(n) registrada la enfermedad "${enfermedad}" en su historial médico.</p>
+							<p>Hay ${numMiembros} miembro(s) que tiene(n) registrada la patología "${enfermedad}" en su historial médico.</p>
 						</div>
 					</div>				
 					<c:forEach var="miembro" items="${lista_miembros}">		
@@ -32,7 +32,7 @@
 										<c:when test="${miembro.descendencia==''}"></c:when>
 									    <c:otherwise> - </c:otherwise>
 									</c:choose>					
-									${miembro.descendencia}<br/>${miembro.anioNacimiento} - ${miembro.anioDefuncion}<br/>${miembro.historialMedico}</p>
+									${miembro.descendencia}<br/>${miembro.edad}<br/>${miembro.historialMedico}</p>
 								
 							</div>				
 						</div>

@@ -13,6 +13,7 @@ public class Miembro {
 	private String descendencia;
 	private int idParentesco;
 	private int idDescendencia;
+	private String edad;
 	
 	public Miembro() {
 		setNombre("");
@@ -23,6 +24,7 @@ public class Miembro {
 		setHistorialMedico("");
 		setParentesco("");
 		setDescendencia("");
+		setEdad("");
 	}
 
 	public int getId() {
@@ -111,6 +113,14 @@ public class Miembro {
 
 	public void setIdDescendencia(int idDescendencia) {
 		this.idDescendencia = idDescendencia;
+	}
+
+	public String getEdad() {
+		return edad;
+	}
+
+	public void setEdad(String edad) {
+		this.edad = edad;
 	}
 
 }

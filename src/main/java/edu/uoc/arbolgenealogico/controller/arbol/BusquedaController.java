@@ -1,5 +1,6 @@
 package edu.uoc.arbolgenealogico.controller.arbol;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,22 @@ public class BusquedaController {
 		ModelAndView model = new ModelAndView("/arbol/busquedas");
 		
 		Usuario user = usuarioservice.getByOnline();
-		if(user!=null) {
+		if(user!=null) {			
+			int anioActual = Calendar.getInstance().get(Calendar.YEAR);
 			List<Miembro> lista = miembroservice.getByHistorialMedico(user.getId(), valor);
 			int numMiembros = 0;
 			boolean sinMiembros = false;
 			if(lista.isEmpty()){
 				sinMiembros = true;
 			}else{
+				for(Miembro m : lista){
+					if(!m.getAnioDefuncion().equals("")){
+						m.setEdad("Fallecido en " +m.getAnioDefuncion());
+					}else if(!m.getAnioNacimiento().equals("")){
+						int edad_m = anioActual - Integer.parseInt(m.getAnioNacimiento());
+						m.setEdad(edad_m + " años");
+					}
+				}
 				numMiembros = lista.size();
 			}
 			model.addObject("enfermedad", valor);

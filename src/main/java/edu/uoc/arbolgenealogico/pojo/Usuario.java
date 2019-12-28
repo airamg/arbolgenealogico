@@ -12,6 +12,7 @@ public class Usuario  {
 	private String apellidos;
 	private String ruta_imagen;
 	private Date ultima_conexion;
+	private String anio_nacimiento;
 	private int online; // 1: conectado - 0: desconectado
 	
 	public Usuario() {		
@@ -19,6 +20,7 @@ public class Usuario  {
 		setPass("");
 		setNombre("");
 		setApellidos("");
+		setAnio_nacimiento("");
 		setRuta_imagen("resources/images/usuario/default.png");
 		setUltima_conexion(new Date(Calendar.getInstance().getTime().getTime()));
 		setOnline(0);
@@ -87,5 +89,13 @@ public class Usuario  {
 	public void setOnline(int online) {
 		this.online = online;
 	}
-	
+
+	public String getAnio_nacimiento() {
+		return anio_nacimiento;
+	}
+
+	public void setAnio_nacimiento(String anio_nacimiento) {
+		this.anio_nacimiento = anio_nacimiento;
+	}
+
 }

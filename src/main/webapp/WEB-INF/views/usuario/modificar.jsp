@@ -33,6 +33,10 @@
 								<form:input id="apellidos" name="apellidos" path="apellidos"
 									placeholder="Apellidos" value="${usuario.apellidos}"/>
 							</div>
+							<div class="form-group">
+								<form:input id="anio_nacimiento" name="anio_nacimiento" path="anio_nacimiento"
+									placeholder="Año nacimiento" value="${usuario.anio_nacimiento}"/>
+							</div>
 							<div class="clearfix"></div>
 							<div class="col-lg-12 text-center">
 								<button type="submit" class="btn btn-xl">Guardar</button>

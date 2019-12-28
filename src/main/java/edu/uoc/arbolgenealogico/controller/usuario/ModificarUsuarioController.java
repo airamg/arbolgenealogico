@@ -49,11 +49,13 @@ public class ModificarUsuarioController {
 				user.setUsername(usuario.getUsername());
 				user.setNombre(usuario.getNombre());
 				user.setApellidos(usuario.getApellidos());
+				user.setAnio_nacimiento(usuario.getAnio_nacimiento());
 			} else {
 				user.setUsername(usuario.getUsername());
 				user.setPass(usuario.getPass());
 				user.setNombre(usuario.getNombre());
 				user.setApellidos(usuario.getApellidos());
+				user.setAnio_nacimiento(usuario.getAnio_nacimiento());
 			}	
 			userservice.update(user);		
 			model = "redirect:/usuarios/cuenta";		

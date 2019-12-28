@@ -55,6 +55,7 @@ public class RegistroUsuarioController {
 			usu.setPass(usuario.getPass());
 			usu.setNombre(usuario.getNombre());
 			usu.setApellidos(usuario.getApellidos());
+			usu.setAnio_nacimiento(usuario.getAnio_nacimiento());
 			usu.setOnline(1);
 			userservice.create(usu);
 			model = "redirect:/usuarios/cuenta";		
