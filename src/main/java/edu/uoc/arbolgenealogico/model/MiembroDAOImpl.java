@@ -34,7 +34,7 @@ public class MiembroDAOImpl implements IMiembroDAO {
 	@Override
 	public Miembro getById(int codigo) {
 		Miembro miembro = null;
-		final String SQL = "SELECT id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,usuario,parentesco,descendencia FROM miembro WHERE id=?";
+		final String SQL = "SELECT id,nombre,apellido,ruta_imagen,anio_nacimiento,anio_defuncion,historial_medico,parentesco,descendencia FROM miembro WHERE id=?";
 		try {
 			miembro = jdbctemplate.queryForObject(SQL, new Object[] { codigo },
 					new MiembroMapper());

@@ -45,7 +45,7 @@ public class ModificarMiembroController {
 		ModelAndView modeloMiembro = new ModelAndView("/arbol/modificarmiembro");
 		Miembro miembro = miembroservice.getById(id);
 		modeloMiembro.addObject("miembro", miembro);
-		
+
 		//lista para el desplegable de parentesco
 		List<Parentesco> parentescos = parentescoservice.getAll();
 		modeloMiembro.addObject("lista_parentesco", parentescos);
@@ -54,6 +54,12 @@ public class ModificarMiembroController {
 		List<Descendencia> descendencias = descendenciaservice.getAll();
 		modeloMiembro.addObject("lista_descendencia", descendencias);
 
+		//saber que desplegable esta seleccionado
+		Parentesco parentescoSelect = parentescoservice.getById(miembro.getIdParentesco());
+		Descendencia descendenciaSelect = descendenciaservice.getById(miembro.getIdDescendencia());
+		modeloMiembro.addObject("parentesco_select", parentescoSelect.getId());
+		modeloMiembro.addObject("descendencia_select", descendenciaSelect.getId());
+		
 		return modeloMiembro;
 		
 	}

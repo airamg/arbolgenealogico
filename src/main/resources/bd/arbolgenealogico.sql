@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `ruta_imagen` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
   `online` int(1) DEFAULT NULL,
   `ultima_conexion` date DEFAULT NULL,
+  `anio_nacimiento` varchar(4) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2;
 
@@ -24,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `username`, `pass`, `nombre`, `apellidos`, `ruta_imagen`, `online`, `ultima_conexion`) VALUES
-(1, 'maria', 'maria', 'Maria', 'Gonzalez Palacios', 'resources/images/usuario/default.png', 0, '2019-12-03');
+INSERT INTO `usuario` (`id`, `username`, `pass`, `nombre`, `apellidos`, `ruta_imagen`, `online`, `ultima_conexion`, `anio_nacimiento`) VALUES
+(1, 'maria', 'maria', 'Maria', 'Gonzalez Palacios', 'resources/images/usuario/default.png', 0, '2019-12-03', '1992');
 
 
 -- --------------------------------------------------------

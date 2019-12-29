@@ -44,14 +44,28 @@
 							<div class="form-group">
 								<form:select path="idParentesco">
 									<c:forEach var="parentesco" items="${lista_parentesco}">
-										<form:option value="${parentesco.id}" label="${parentesco.descripcion}" />							
+										<c:choose>
+											<c:when test="${parentesco_select==parentesco.id}">
+												<form:option value="${parentesco.id}" label="${parentesco.descripcion}" selected="selected"/>
+											</c:when>
+											<c:otherwise>
+												<form:option value="${parentesco.id}" label="${parentesco.descripcion}" />
+											</c:otherwise>
+										</c:choose>																		
 									</c:forEach>
 								</form:select>
 							</div>							
 							<div class="form-group">
 								<form:select path="idDescendencia">
 									<c:forEach var="descendencia" items="${lista_descendencia}">
-										<form:option value="${descendencia.id}" label="${descendencia.tipoRama}" />									
+										<c:choose>
+											<c:when test="${descendencia_select==descendencia.id}">
+												<form:option value="${descendencia.id}" label="${descendencia.tipoRama}" selected="selected"/>
+											</c:when>
+											<c:otherwise>
+												<form:option value="${descendencia.id}" label="${descendencia.tipoRama}" />
+											</c:otherwise>
+										</c:choose>																			
 									</c:forEach>
 								</form:select>
 							</div>

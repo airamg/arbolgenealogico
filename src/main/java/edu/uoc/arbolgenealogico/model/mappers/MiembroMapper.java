@@ -19,6 +19,8 @@ public class MiembroMapper implements RowMapper<Miembro> {
 		miembro.setAnioNacimiento(rs.getString("anio_nacimiento"));
 		miembro.setAnioDefuncion(rs.getString("anio_defuncion"));
 		miembro.setHistorialMedico(rs.getString("historial_medico"));
+		miembro.setIdParentesco(rs.getInt("parentesco"));
+		miembro.setIdDescendencia(rs.getInt("descendencia"));
 	    return miembro;
 	}
 
