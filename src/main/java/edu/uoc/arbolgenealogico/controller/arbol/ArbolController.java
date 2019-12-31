@@ -80,9 +80,9 @@ public class ArbolController {
 					rama2_abuelospaternos.add(miembroVacio);
 					rama2_abuelospaternos.add(a2);					
 				}
-				if(!rama1_tiospaternos.isEmpty()){
+				if(!rama1_tiospaternos.isEmpty() || !rama0_primospaternos.isEmpty()){
 					row_Abuelos_TiosPadres_a = "abuelos-tios_izquierda.jpg";
-				}				
+				}
 			}
 			if(rama2_abuelosmaternos.isEmpty()){
 				rama2_abuelosmaternos.add(miembroVacio);
@@ -101,7 +101,7 @@ public class ArbolController {
 					rama2_abuelosmaternos.add(miembroVacio);
 					rama2_abuelosmaternos.add(a2);					
 				}	
-				if(!rama1_tiosmaternos.isEmpty()){
+				if(!rama1_tiosmaternos.isEmpty() || !rama0_primosmaternos.isEmpty()){
 					row_Abuelos_TiosPadres_b = "abuelos-tios_derecha.jpg";
 				}				
 			}
@@ -138,7 +138,6 @@ public class ArbolController {
 				rama1_tiospaternos.add(miembroVacio);
 			}else{ 
 				row_Abuelos_TiosPadres_a = "abuelos-tios_izquierda.jpg";
-				row_TiosPadres_PrimosHermanos_a = "abuelos-tios_simple.jpg";
 				if(rama1_tiospaternos.size()==1){
 					Miembro t = rama1_tiospaternos.get(0);
 					rama1_tiospaternos.clear();
@@ -146,6 +145,7 @@ public class ArbolController {
 					rama1_tiospaternos.add(miembroVacio);
 					rama1_tiospaternos.add(t);
 				}else{
+					row_TiosPadres_PrimosHermanos_a = "tios_simple.jpg";
 					Miembro t1 = rama1_tiospaternos.get(0);
 					Miembro t2 = rama1_tiospaternos.get(1);
 					rama1_tiospaternos.clear();
@@ -154,10 +154,12 @@ public class ArbolController {
 					rama1_tiospaternos.add(t2);
 				}	
 				if(!rama0_primospaternos.isEmpty()){
-					if(rama0_primospaternos.size()==2){
+					if(rama0_primospaternos.size()==1){
+						row_TiosPadres_PrimosHermanos_a = "abuelos-tios_simple.jpg";
+					}else if(rama0_primospaternos.size()==2){
 						row_TiosPadres_PrimosHermanos_a = "abuelos-tios_izquierda.jpg";
 					}else if(rama0_primospaternos.size()==3){
-						row_TiosPadres_PrimosHermanos_a = "abuelos-tios_completo.jpg";
+						row_TiosPadres_PrimosHermanos_a = "tios_completo.jpg";
 					}										
 				}				
 			}
@@ -167,7 +169,6 @@ public class ArbolController {
 				rama1_tiosmaternos.add(miembroVacio);
 			}else{ 
 				row_Abuelos_TiosPadres_b = "abuelos-tios_derecha.jpg";
-				row_TiosPadres_PrimosHermanos_c = "abuelos-tios_simple.jpg";
 				if(rama1_tiosmaternos.size()==1){
 					Miembro t = rama1_tiosmaternos.get(0);
 					rama1_tiosmaternos.clear();
@@ -175,6 +176,7 @@ public class ArbolController {
 					rama1_tiosmaternos.add(miembroVacio);
 					rama1_tiosmaternos.add(miembroVacio);					
 				}else{
+					row_TiosPadres_PrimosHermanos_c = "tios_simple.jpg";
 					Miembro t1 = rama1_tiosmaternos.get(0);
 					Miembro t2 = rama1_tiosmaternos.get(1);
 					rama1_tiosmaternos.clear();
@@ -183,10 +185,12 @@ public class ArbolController {
 					rama1_tiosmaternos.add(t2);
 				}	
 				if(!rama0_primosmaternos.isEmpty()){
-					if(rama0_primosmaternos.size()==2){
+					if(rama0_primosmaternos.size()==1){
+						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_simple.jpg";
+					}else if(rama0_primosmaternos.size()==2){
 						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_derecha.jpg";
 					}else if(rama0_primosmaternos.size()==3){
-						row_TiosPadres_PrimosHermanos_c = "abuelos-tios_completo.jpg";
+						row_TiosPadres_PrimosHermanos_c = "tios_completo.jpg";
 					}										
 				}				
 			}
@@ -298,7 +302,7 @@ public class ArbolController {
 					rama0_primospaternos.add(p2);
 					rama0_primospaternos.add(miembroVacio);
 				}else if(rama0_primospaternos.size()==3){
-					row_TiosPadres_PrimosHermanos_a = "abuelos-tios_completo.jpg";
+					row_TiosPadres_PrimosHermanos_a = "tios_completo.jpg";
 					Miembro p1 = rama0_primospaternos.get(0);
 					Miembro p2 = rama0_primospaternos.get(1);
 					Miembro p3 = rama0_primospaternos.get(2);
@@ -330,7 +334,7 @@ public class ArbolController {
 					rama0_primosmaternos.add(p1);
 					rama0_primosmaternos.add(p2);					
 				}else if(rama0_primosmaternos.size()==3){
-					row_TiosPadres_PrimosHermanos_c = "abuelos-tios_completo.jpg";
+					row_TiosPadres_PrimosHermanos_c = "tios_completo.jpg";
 					Miembro p1 = rama0_primosmaternos.get(0);
 					Miembro p2 = rama0_primosmaternos.get(1);
 					Miembro p3 = rama0_primosmaternos.get(2);

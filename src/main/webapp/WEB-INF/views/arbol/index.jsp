@@ -61,7 +61,7 @@
 		</div>	
 		<div class="row">
 			<c:forEach var="miembro" items="${lista_miembros}">		
-			<div class="col-sm-4">
+			<div class="col-sm-5">
 				<div class="team-member">
 					<img src="${pageContext.request.contextPath}/${miembro.rutaImagen}" height=200px; width=200px; class="img-responsive img-circle" alt="">
 					<h4>${miembro.nombre} ${miembro.apellido}</h4>

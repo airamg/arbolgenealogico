@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h2 class="section-heading">Nuevo usuario</h2>
+							<h2 class="section-heading" style="color:#fec503;">Nuevo usuario</h2>
 						</div>
 					</div>
 					<div class="col-lg-12 text-center">

@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="row">
 						<div class="col-lg-12 text-center">
-							<h2 class="section-heading" >Inicia sesión</h2>
+							<h2 class="section-heading" style="color:#fec503;">Inicia sesión</h2>
 						</div>
 					</div>
 					<div class="col-lg-12 text-center">					
